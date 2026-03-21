@@ -1,15 +1,19 @@
 import Features from "@/components/layouts/Features";
 import Hero from "@/components/layouts/Hero";
+import { getServerSession } from "@/lib/session";
+import Link from "next/link";
 import { BiTerminal } from "react-icons/bi";
 import { BsCodeSlash, BsTencentQq, BsTerminal, BsUbuntu } from "react-icons/bs";
 import { MdHub } from "react-icons/md";
 
-export default function Home() {
+export default async function Home() {
+  const session = await getServerSession();
+
   return (
     <div className="flex min-h-screen items-center justify-center bg-background-dark font-sans dark:bg-black">
-      <main className="flex min-h-screen max-w-5xl flex-col items-center justify-between pt-6 px-6 bg-white dark:bg-black sm:items-start">
+      <main className="flex min-h-screen max-w-5xl flex-col items-center justify-between pt-6 px-4 bg-white dark:bg-black sm:items-start">
         {/* Top Navigation */}
-        <nav className="flex items-center justify-between w-full max-w-2xl mx-auto">
+        <nav className="flex items-center justify-between max-w-5xl w-full mx-auto">
           <div className="flex items-center gap-2">
             <div className="bg-custom-primary p-0.5 rounded-sm">
               <BiTerminal className="text-white size-6" />
@@ -18,9 +22,37 @@ export default function Home() {
           </div>
 
           <div className="flex items-center">
-            <button className="p-2 bg-blue-600/30 text-white rounded-md text-sm">
-              Sign In
-            </button>
+            {session?.user ? (
+              <>
+                <Link
+                  href={"/explainer"}
+                  className="p-2 text-white rounded-md text-sm tracking-tight"
+                >
+                  Explainer
+                </Link>
+
+                <Link
+                  href={"/history"}
+                  className="p-2 text-white rounded-md text-sm tracking-tight"
+                >
+                  History
+                </Link>
+
+                <Link
+                  href={"/settings"}
+                  className="p-2 text-white rounded-md text-sm tracking-tight"
+                >
+                  Settings
+                </Link>
+              </>
+            ) : (
+              <Link
+                href={"/login"}
+                className="p-2 bg-blue-600/30 text-white rounded-md text-sm tracking-tight"
+              >
+                Sign In
+              </Link>
+            )}
           </div>
         </nav>
 

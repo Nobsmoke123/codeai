@@ -1,9 +1,17 @@
 import Navigation from "@/components/ui/Navigation";
+import { getServerSession } from "@/lib/session";
+import { redirect } from "next/navigation";
 import { BiCode, BiCoinStack, BiDotsVerticalRounded } from "react-icons/bi";
 
 import { BiTerminal } from "react-icons/bi";
 
-const HistoryPage = () => {
+const HistoryPage = async () => {
+  const session = await getServerSession();
+
+  if (!session?.user) {
+    redirect("/login");
+  }
+
   return (
     <div className="w-full max-w-5xl mx-auto bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100">
       <div className="relative flex min-h-screen flex-col mx-auto overflow-x-hidden pt-6">

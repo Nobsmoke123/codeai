@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { BsArrowRight, BsArrowUpRight, BsStars } from "react-icons/bs";
 
 const Hero = () => {
@@ -64,10 +65,13 @@ const Hero = () => {
       </div>
       {/* <!-- CTA Buttons --> */}
       <div className="w-full max-w-md space-y-4 mx-auto">
-        <button className="w-full max-w-md py-4 bg-custom-primary hover:bg-primary/90 text-white font-bold rounded-xl transition-all shadow-lg shadow-primary/25 flex items-center justify-center gap-2">
+        <Link
+          href={"/register"}
+          className="w-full max-w-md py-4 bg-custom-primary hover:bg-primary/90 text-white font-bold rounded-xl transition-all shadow-lg shadow-primary/25 flex items-center justify-center gap-2"
+        >
           <span>Get Started</span>
           <BsArrowUpRight className="" />
-        </button>
+        </Link>
         <button className="w-full max-w-md py-4 bg-transparent text-slate-600 dark:text-slate-400 font-semibold rounded-xl hover:bg-slate-200 dark:hover:bg-slate-800 transition-all">
           See Examples
         </button>

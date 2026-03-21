@@ -1,9 +1,17 @@
 import Navigation from "@/components/ui/Navigation";
+import { getServerSession } from "@/lib/session";
+import { redirect } from "next/navigation";
 import { BiClipboard, BiSolidCheckShield } from "react-icons/bi";
 import { BsStars } from "react-icons/bs";
 import { MdPsychology } from "react-icons/md";
 
-const EditorPage = () => {
+const EditorPage = async () => {
+  const session = await getServerSession();
+
+  if(!session?.user){
+    redirect('/login');
+  }
+
   return (
     <div className="flex min-h-screen items-center justify-center bg-background-dark font-sans dark:bg-black">
       <main className="flex min-h-screen w-full max-w-5xl flex-col items-center justify-between pt-6 px-6 bg-white dark:bg-black sm:items-start">

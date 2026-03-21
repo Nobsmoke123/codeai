@@ -5,25 +5,28 @@ import { prismaAdapter } from "better-auth/adapters/prisma";
 
 const prisma = new PrismaClient({
   adapter: new PrismaPg({
-    connectionString: process.env.NEXT_DATABASE_URL,
+    connectionString: process.env.DATABASE_URL,
   }),
 });
 
 export const auth = betterAuth({
+  baseURL: process.env.BETTER_AUTH_URL,
   emailAndPassword: {
     enabled: true,
+    autoSignIn: false,
   },
   emailVerification: {
     autoSignInAfterVerification: true,
   },
   socialProviders: {
     github: {
-      clientId: "",
-      clientSecret: "",
+      clientId: process.env.GITHUB_CLIENT_ID!,
+      clientSecret: process.env.GITHUB_CLIENT_SECRET!,
     },
     google: {
-      clientId: "",
-      clientSecret: "",
+      prompt: "select_account",
+      clientId: process.env.GOOGLE_CLIENT_ID!,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
     },
   },
   database: prismaAdapter(prisma, {

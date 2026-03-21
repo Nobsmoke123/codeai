@@ -1,6 +1,8 @@
 "use client";
 
 import Navigation from "@/components/ui/Navigation";
+import { getServerSession } from "@/lib/session";
+import { redirect } from "next/navigation";
 import { BiMenu, BiSolidFile } from "react-icons/bi";
 import { BsGlobe } from "react-icons/bs";
 import {
@@ -15,7 +17,13 @@ import {
   MdOutlineSecurity,
 } from "react-icons/md";
 
-const SettingsPage = () => {
+const SettingsPage = async () => {
+  const session = await getServerSession();
+
+  if (!session?.user) {
+    redirect("/login");
+  }
+
   return (
     <div className="w-full max-w-5xl pt-6 mx-auto bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen font-display">
       <Navigation />
