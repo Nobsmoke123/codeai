@@ -71,3 +71,8 @@ export type Profile = Prisma.ProfileModel
  * 
  */
 export type Explanation = Prisma.ExplanationModel
+/**
+ * Model ExplanationStep
+ * 
+ */
+export type ExplanationStep = Prisma.ExplanationStepModel

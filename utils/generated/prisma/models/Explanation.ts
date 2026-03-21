@@ -28,10 +28,16 @@ export type AggregateExplanation = {
 
 export type ExplanationAvgAggregateOutputType = {
   id: number | null
+  prompt_tokens: number | null
+  completion_tokens: number | null
+  total_tokens: number | null
 }
 
 export type ExplanationSumAggregateOutputType = {
   id: bigint | null
+  prompt_tokens: number | null
+  completion_tokens: number | null
+  total_tokens: number | null
 }
 
 export type ExplanationMinAggregateOutputType = {
@@ -39,14 +45,19 @@ export type ExplanationMinAggregateOutputType = {
   user_id: string | null
   title: string | null
   code: string | null
-  code_language: string | null
-  explanation: string | null
+  language: string | null
   summary: string | null
+  longSummary: string | null
   complexity: $Enums.ExplanationComplexity | null
   optimization_tip: string | null
   performance_impact: string | null
+  model: string | null
   status: $Enums.ExplanationStatus | null
   error_message: string | null
+  prompt_tokens: number | null
+  completion_tokens: number | null
+  total_tokens: number | null
+  deleted_at: Date | null
   created_at: Date | null
   updated_at: Date | null
 }
@@ -56,14 +67,19 @@ export type ExplanationMaxAggregateOutputType = {
   user_id: string | null
   title: string | null
   code: string | null
-  code_language: string | null
-  explanation: string | null
+  language: string | null
   summary: string | null
+  longSummary: string | null
   complexity: $Enums.ExplanationComplexity | null
   optimization_tip: string | null
   performance_impact: string | null
+  model: string | null
   status: $Enums.ExplanationStatus | null
   error_message: string | null
+  prompt_tokens: number | null
+  completion_tokens: number | null
+  total_tokens: number | null
+  deleted_at: Date | null
   created_at: Date | null
   updated_at: Date | null
 }
@@ -73,14 +89,20 @@ export type ExplanationCountAggregateOutputType = {
   user_id: number
   title: number
   code: number
-  code_language: number
-  explanation: number
+  language: number
   summary: number
+  longSummary: number
   complexity: number
   optimization_tip: number
   performance_impact: number
+  model: number
+  raw_response_json: number
   status: number
   error_message: number
+  prompt_tokens: number
+  completion_tokens: number
+  total_tokens: number
+  deleted_at: number
   created_at: number
   updated_at: number
   _all: number
@@ -89,10 +111,16 @@ export type ExplanationCountAggregateOutputType = {
 
 export type ExplanationAvgAggregateInputType = {
   id?: true
+  prompt_tokens?: true
+  completion_tokens?: true
+  total_tokens?: true
 }
 
 export type ExplanationSumAggregateInputType = {
   id?: true
+  prompt_tokens?: true
+  completion_tokens?: true
+  total_tokens?: true
 }
 
 export type ExplanationMinAggregateInputType = {
@@ -100,14 +128,19 @@ export type ExplanationMinAggregateInputType = {
   user_id?: true
   title?: true
   code?: true
-  code_language?: true
-  explanation?: true
+  language?: true
   summary?: true
+  longSummary?: true
   complexity?: true
   optimization_tip?: true
   performance_impact?: true
+  model?: true
   status?: true
   error_message?: true
+  prompt_tokens?: true
+  completion_tokens?: true
+  total_tokens?: true
+  deleted_at?: true
   created_at?: true
   updated_at?: true
 }
@@ -117,14 +150,19 @@ export type ExplanationMaxAggregateInputType = {
   user_id?: true
   title?: true
   code?: true
-  code_language?: true
-  explanation?: true
+  language?: true
   summary?: true
+  longSummary?: true
   complexity?: true
   optimization_tip?: true
   performance_impact?: true
+  model?: true
   status?: true
   error_message?: true
+  prompt_tokens?: true
+  completion_tokens?: true
+  total_tokens?: true
+  deleted_at?: true
   created_at?: true
   updated_at?: true
 }
@@ -134,14 +172,20 @@ export type ExplanationCountAggregateInputType = {
   user_id?: true
   title?: true
   code?: true
-  code_language?: true
-  explanation?: true
+  language?: true
   summary?: true
+  longSummary?: true
   complexity?: true
   optimization_tip?: true
   performance_impact?: true
+  model?: true
+  raw_response_json?: true
   status?: true
   error_message?: true
+  prompt_tokens?: true
+  completion_tokens?: true
+  total_tokens?: true
+  deleted_at?: true
   created_at?: true
   updated_at?: true
   _all?: true
@@ -238,14 +282,20 @@ export type ExplanationGroupByOutputType = {
   user_id: string
   title: string
   code: string
-  code_language: string
-  explanation: string
+  language: string
   summary: string
+  longSummary: string
   complexity: $Enums.ExplanationComplexity
-  optimization_tip: string
+  optimization_tip: string | null
   performance_impact: string
+  model: string
+  raw_response_json: runtime.JsonValue
   status: $Enums.ExplanationStatus
   error_message: string | null
+  prompt_tokens: number | null
+  completion_tokens: number | null
+  total_tokens: number | null
+  deleted_at: Date | null
   created_at: Date
   updated_at: Date
   _count: ExplanationCountAggregateOutputType | null
@@ -278,17 +328,24 @@ export type ExplanationWhereInput = {
   user_id?: Prisma.StringFilter<"Explanation"> | string
   title?: Prisma.StringFilter<"Explanation"> | string
   code?: Prisma.StringFilter<"Explanation"> | string
-  code_language?: Prisma.StringFilter<"Explanation"> | string
-  explanation?: Prisma.StringFilter<"Explanation"> | string
+  language?: Prisma.StringFilter<"Explanation"> | string
   summary?: Prisma.StringFilter<"Explanation"> | string
+  longSummary?: Prisma.StringFilter<"Explanation"> | string
   complexity?: Prisma.EnumExplanationComplexityFilter<"Explanation"> | $Enums.ExplanationComplexity
-  optimization_tip?: Prisma.StringFilter<"Explanation"> | string
+  optimization_tip?: Prisma.StringNullableFilter<"Explanation"> | string | null
   performance_impact?: Prisma.StringFilter<"Explanation"> | string
+  model?: Prisma.StringFilter<"Explanation"> | string
+  raw_response_json?: Prisma.JsonFilter<"Explanation">
   status?: Prisma.EnumExplanationStatusFilter<"Explanation"> | $Enums.ExplanationStatus
   error_message?: Prisma.StringNullableFilter<"Explanation"> | string | null
+  prompt_tokens?: Prisma.IntNullableFilter<"Explanation"> | number | null
+  completion_tokens?: Prisma.IntNullableFilter<"Explanation"> | number | null
+  total_tokens?: Prisma.IntNullableFilter<"Explanation"> | number | null
+  deleted_at?: Prisma.DateTimeNullableFilter<"Explanation"> | Date | string | null
   created_at?: Prisma.DateTimeFilter<"Explanation"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"Explanation"> | Date | string
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  explanation_steps?: Prisma.ExplanationStepListRelationFilter
 }
 
 export type ExplanationOrderByWithRelationInput = {
@@ -296,53 +353,73 @@ export type ExplanationOrderByWithRelationInput = {
   user_id?: Prisma.SortOrder
   title?: Prisma.SortOrder
   code?: Prisma.SortOrder
-  code_language?: Prisma.SortOrder
-  explanation?: Prisma.SortOrder
+  language?: Prisma.SortOrder
   summary?: Prisma.SortOrder
+  longSummary?: Prisma.SortOrder
   complexity?: Prisma.SortOrder
-  optimization_tip?: Prisma.SortOrder
+  optimization_tip?: Prisma.SortOrderInput | Prisma.SortOrder
   performance_impact?: Prisma.SortOrder
+  model?: Prisma.SortOrder
+  raw_response_json?: Prisma.SortOrder
   status?: Prisma.SortOrder
   error_message?: Prisma.SortOrderInput | Prisma.SortOrder
+  prompt_tokens?: Prisma.SortOrderInput | Prisma.SortOrder
+  completion_tokens?: Prisma.SortOrderInput | Prisma.SortOrder
+  total_tokens?: Prisma.SortOrderInput | Prisma.SortOrder
+  deleted_at?: Prisma.SortOrderInput | Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
   user?: Prisma.UserOrderByWithRelationInput
+  explanation_steps?: Prisma.ExplanationStepOrderByRelationAggregateInput
 }
 
 export type ExplanationWhereUniqueInput = Prisma.AtLeast<{
   id?: bigint | number
-  user_id?: string
   AND?: Prisma.ExplanationWhereInput | Prisma.ExplanationWhereInput[]
   OR?: Prisma.ExplanationWhereInput[]
   NOT?: Prisma.ExplanationWhereInput | Prisma.ExplanationWhereInput[]
+  user_id?: Prisma.StringFilter<"Explanation"> | string
   title?: Prisma.StringFilter<"Explanation"> | string
   code?: Prisma.StringFilter<"Explanation"> | string
-  code_language?: Prisma.StringFilter<"Explanation"> | string
-  explanation?: Prisma.StringFilter<"Explanation"> | string
+  language?: Prisma.StringFilter<"Explanation"> | string
   summary?: Prisma.StringFilter<"Explanation"> | string
+  longSummary?: Prisma.StringFilter<"Explanation"> | string
   complexity?: Prisma.EnumExplanationComplexityFilter<"Explanation"> | $Enums.ExplanationComplexity
-  optimization_tip?: Prisma.StringFilter<"Explanation"> | string
+  optimization_tip?: Prisma.StringNullableFilter<"Explanation"> | string | null
   performance_impact?: Prisma.StringFilter<"Explanation"> | string
+  model?: Prisma.StringFilter<"Explanation"> | string
+  raw_response_json?: Prisma.JsonFilter<"Explanation">
   status?: Prisma.EnumExplanationStatusFilter<"Explanation"> | $Enums.ExplanationStatus
   error_message?: Prisma.StringNullableFilter<"Explanation"> | string | null
+  prompt_tokens?: Prisma.IntNullableFilter<"Explanation"> | number | null
+  completion_tokens?: Prisma.IntNullableFilter<"Explanation"> | number | null
+  total_tokens?: Prisma.IntNullableFilter<"Explanation"> | number | null
+  deleted_at?: Prisma.DateTimeNullableFilter<"Explanation"> | Date | string | null
   created_at?: Prisma.DateTimeFilter<"Explanation"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"Explanation"> | Date | string
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
-}, "id" | "user_id">
+  explanation_steps?: Prisma.ExplanationStepListRelationFilter
+}, "id">
 
 export type ExplanationOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   user_id?: Prisma.SortOrder
   title?: Prisma.SortOrder
   code?: Prisma.SortOrder
-  code_language?: Prisma.SortOrder
-  explanation?: Prisma.SortOrder
+  language?: Prisma.SortOrder
   summary?: Prisma.SortOrder
+  longSummary?: Prisma.SortOrder
   complexity?: Prisma.SortOrder
-  optimization_tip?: Prisma.SortOrder
+  optimization_tip?: Prisma.SortOrderInput | Prisma.SortOrder
   performance_impact?: Prisma.SortOrder
+  model?: Prisma.SortOrder
+  raw_response_json?: Prisma.SortOrder
   status?: Prisma.SortOrder
   error_message?: Prisma.SortOrderInput | Prisma.SortOrder
+  prompt_tokens?: Prisma.SortOrderInput | Prisma.SortOrder
+  completion_tokens?: Prisma.SortOrderInput | Prisma.SortOrder
+  total_tokens?: Prisma.SortOrderInput | Prisma.SortOrder
+  deleted_at?: Prisma.SortOrderInput | Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
   _count?: Prisma.ExplanationCountOrderByAggregateInput
@@ -360,14 +437,20 @@ export type ExplanationScalarWhereWithAggregatesInput = {
   user_id?: Prisma.StringWithAggregatesFilter<"Explanation"> | string
   title?: Prisma.StringWithAggregatesFilter<"Explanation"> | string
   code?: Prisma.StringWithAggregatesFilter<"Explanation"> | string
-  code_language?: Prisma.StringWithAggregatesFilter<"Explanation"> | string
-  explanation?: Prisma.StringWithAggregatesFilter<"Explanation"> | string
+  language?: Prisma.StringWithAggregatesFilter<"Explanation"> | string
   summary?: Prisma.StringWithAggregatesFilter<"Explanation"> | string
+  longSummary?: Prisma.StringWithAggregatesFilter<"Explanation"> | string
   complexity?: Prisma.EnumExplanationComplexityWithAggregatesFilter<"Explanation"> | $Enums.ExplanationComplexity
-  optimization_tip?: Prisma.StringWithAggregatesFilter<"Explanation"> | string
+  optimization_tip?: Prisma.StringNullableWithAggregatesFilter<"Explanation"> | string | null
   performance_impact?: Prisma.StringWithAggregatesFilter<"Explanation"> | string
+  model?: Prisma.StringWithAggregatesFilter<"Explanation"> | string
+  raw_response_json?: Prisma.JsonWithAggregatesFilter<"Explanation">
   status?: Prisma.EnumExplanationStatusWithAggregatesFilter<"Explanation"> | $Enums.ExplanationStatus
   error_message?: Prisma.StringNullableWithAggregatesFilter<"Explanation"> | string | null
+  prompt_tokens?: Prisma.IntNullableWithAggregatesFilter<"Explanation"> | number | null
+  completion_tokens?: Prisma.IntNullableWithAggregatesFilter<"Explanation"> | number | null
+  total_tokens?: Prisma.IntNullableWithAggregatesFilter<"Explanation"> | number | null
+  deleted_at?: Prisma.DateTimeNullableWithAggregatesFilter<"Explanation"> | Date | string | null
   created_at?: Prisma.DateTimeWithAggregatesFilter<"Explanation"> | Date | string
   updated_at?: Prisma.DateTimeWithAggregatesFilter<"Explanation"> | Date | string
 }
@@ -376,17 +459,24 @@ export type ExplanationCreateInput = {
   id?: bigint | number
   title: string
   code: string
-  code_language: string
-  explanation: string
+  language: string
   summary: string
+  longSummary: string
   complexity: $Enums.ExplanationComplexity
-  optimization_tip: string
+  optimization_tip?: string | null
   performance_impact: string
+  model: string
+  raw_response_json: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: $Enums.ExplanationStatus
   error_message?: string | null
+  prompt_tokens?: number | null
+  completion_tokens?: number | null
+  total_tokens?: number | null
+  deleted_at?: Date | string | null
   created_at?: Date | string
   updated_at?: Date | string
   user: Prisma.UserCreateNestedOneWithoutExplanationsInput
+  explanation_steps?: Prisma.ExplanationStepCreateNestedManyWithoutExplanationInput
 }
 
 export type ExplanationUncheckedCreateInput = {
@@ -394,33 +484,47 @@ export type ExplanationUncheckedCreateInput = {
   user_id: string
   title: string
   code: string
-  code_language: string
-  explanation: string
+  language: string
   summary: string
+  longSummary: string
   complexity: $Enums.ExplanationComplexity
-  optimization_tip: string
+  optimization_tip?: string | null
   performance_impact: string
+  model: string
+  raw_response_json: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: $Enums.ExplanationStatus
   error_message?: string | null
+  prompt_tokens?: number | null
+  completion_tokens?: number | null
+  total_tokens?: number | null
+  deleted_at?: Date | string | null
   created_at?: Date | string
   updated_at?: Date | string
+  explanation_steps?: Prisma.ExplanationStepUncheckedCreateNestedManyWithoutExplanationInput
 }
 
 export type ExplanationUpdateInput = {
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   title?: Prisma.StringFieldUpdateOperationsInput | string
   code?: Prisma.StringFieldUpdateOperationsInput | string
-  code_language?: Prisma.StringFieldUpdateOperationsInput | string
-  explanation?: Prisma.StringFieldUpdateOperationsInput | string
+  language?: Prisma.StringFieldUpdateOperationsInput | string
   summary?: Prisma.StringFieldUpdateOperationsInput | string
+  longSummary?: Prisma.StringFieldUpdateOperationsInput | string
   complexity?: Prisma.EnumExplanationComplexityFieldUpdateOperationsInput | $Enums.ExplanationComplexity
-  optimization_tip?: Prisma.StringFieldUpdateOperationsInput | string
+  optimization_tip?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   performance_impact?: Prisma.StringFieldUpdateOperationsInput | string
+  model?: Prisma.StringFieldUpdateOperationsInput | string
+  raw_response_json?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: Prisma.EnumExplanationStatusFieldUpdateOperationsInput | $Enums.ExplanationStatus
   error_message?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  prompt_tokens?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  completion_tokens?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  total_tokens?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutExplanationsNestedInput
+  explanation_steps?: Prisma.ExplanationStepUpdateManyWithoutExplanationNestedInput
 }
 
 export type ExplanationUncheckedUpdateInput = {
@@ -428,16 +532,23 @@ export type ExplanationUncheckedUpdateInput = {
   user_id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   code?: Prisma.StringFieldUpdateOperationsInput | string
-  code_language?: Prisma.StringFieldUpdateOperationsInput | string
-  explanation?: Prisma.StringFieldUpdateOperationsInput | string
+  language?: Prisma.StringFieldUpdateOperationsInput | string
   summary?: Prisma.StringFieldUpdateOperationsInput | string
+  longSummary?: Prisma.StringFieldUpdateOperationsInput | string
   complexity?: Prisma.EnumExplanationComplexityFieldUpdateOperationsInput | $Enums.ExplanationComplexity
-  optimization_tip?: Prisma.StringFieldUpdateOperationsInput | string
+  optimization_tip?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   performance_impact?: Prisma.StringFieldUpdateOperationsInput | string
+  model?: Prisma.StringFieldUpdateOperationsInput | string
+  raw_response_json?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: Prisma.EnumExplanationStatusFieldUpdateOperationsInput | $Enums.ExplanationStatus
   error_message?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  prompt_tokens?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  completion_tokens?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  total_tokens?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  explanation_steps?: Prisma.ExplanationStepUncheckedUpdateManyWithoutExplanationNestedInput
 }
 
 export type ExplanationCreateManyInput = {
@@ -445,14 +556,20 @@ export type ExplanationCreateManyInput = {
   user_id: string
   title: string
   code: string
-  code_language: string
-  explanation: string
+  language: string
   summary: string
+  longSummary: string
   complexity: $Enums.ExplanationComplexity
-  optimization_tip: string
+  optimization_tip?: string | null
   performance_impact: string
+  model: string
+  raw_response_json: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: $Enums.ExplanationStatus
   error_message?: string | null
+  prompt_tokens?: number | null
+  completion_tokens?: number | null
+  total_tokens?: number | null
+  deleted_at?: Date | string | null
   created_at?: Date | string
   updated_at?: Date | string
 }
@@ -461,14 +578,20 @@ export type ExplanationUpdateManyMutationInput = {
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   title?: Prisma.StringFieldUpdateOperationsInput | string
   code?: Prisma.StringFieldUpdateOperationsInput | string
-  code_language?: Prisma.StringFieldUpdateOperationsInput | string
-  explanation?: Prisma.StringFieldUpdateOperationsInput | string
+  language?: Prisma.StringFieldUpdateOperationsInput | string
   summary?: Prisma.StringFieldUpdateOperationsInput | string
+  longSummary?: Prisma.StringFieldUpdateOperationsInput | string
   complexity?: Prisma.EnumExplanationComplexityFieldUpdateOperationsInput | $Enums.ExplanationComplexity
-  optimization_tip?: Prisma.StringFieldUpdateOperationsInput | string
+  optimization_tip?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   performance_impact?: Prisma.StringFieldUpdateOperationsInput | string
+  model?: Prisma.StringFieldUpdateOperationsInput | string
+  raw_response_json?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: Prisma.EnumExplanationStatusFieldUpdateOperationsInput | $Enums.ExplanationStatus
   error_message?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  prompt_tokens?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  completion_tokens?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  total_tokens?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -478,14 +601,20 @@ export type ExplanationUncheckedUpdateManyInput = {
   user_id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   code?: Prisma.StringFieldUpdateOperationsInput | string
-  code_language?: Prisma.StringFieldUpdateOperationsInput | string
-  explanation?: Prisma.StringFieldUpdateOperationsInput | string
+  language?: Prisma.StringFieldUpdateOperationsInput | string
   summary?: Prisma.StringFieldUpdateOperationsInput | string
+  longSummary?: Prisma.StringFieldUpdateOperationsInput | string
   complexity?: Prisma.EnumExplanationComplexityFieldUpdateOperationsInput | $Enums.ExplanationComplexity
-  optimization_tip?: Prisma.StringFieldUpdateOperationsInput | string
+  optimization_tip?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   performance_impact?: Prisma.StringFieldUpdateOperationsInput | string
+  model?: Prisma.StringFieldUpdateOperationsInput | string
+  raw_response_json?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: Prisma.EnumExplanationStatusFieldUpdateOperationsInput | $Enums.ExplanationStatus
   error_message?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  prompt_tokens?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  completion_tokens?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  total_tokens?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -505,20 +634,29 @@ export type ExplanationCountOrderByAggregateInput = {
   user_id?: Prisma.SortOrder
   title?: Prisma.SortOrder
   code?: Prisma.SortOrder
-  code_language?: Prisma.SortOrder
-  explanation?: Prisma.SortOrder
+  language?: Prisma.SortOrder
   summary?: Prisma.SortOrder
+  longSummary?: Prisma.SortOrder
   complexity?: Prisma.SortOrder
   optimization_tip?: Prisma.SortOrder
   performance_impact?: Prisma.SortOrder
+  model?: Prisma.SortOrder
+  raw_response_json?: Prisma.SortOrder
   status?: Prisma.SortOrder
   error_message?: Prisma.SortOrder
+  prompt_tokens?: Prisma.SortOrder
+  completion_tokens?: Prisma.SortOrder
+  total_tokens?: Prisma.SortOrder
+  deleted_at?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
 }
 
 export type ExplanationAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  prompt_tokens?: Prisma.SortOrder
+  completion_tokens?: Prisma.SortOrder
+  total_tokens?: Prisma.SortOrder
 }
 
 export type ExplanationMaxOrderByAggregateInput = {
@@ -526,14 +664,19 @@ export type ExplanationMaxOrderByAggregateInput = {
   user_id?: Prisma.SortOrder
   title?: Prisma.SortOrder
   code?: Prisma.SortOrder
-  code_language?: Prisma.SortOrder
-  explanation?: Prisma.SortOrder
+  language?: Prisma.SortOrder
   summary?: Prisma.SortOrder
+  longSummary?: Prisma.SortOrder
   complexity?: Prisma.SortOrder
   optimization_tip?: Prisma.SortOrder
   performance_impact?: Prisma.SortOrder
+  model?: Prisma.SortOrder
   status?: Prisma.SortOrder
   error_message?: Prisma.SortOrder
+  prompt_tokens?: Prisma.SortOrder
+  completion_tokens?: Prisma.SortOrder
+  total_tokens?: Prisma.SortOrder
+  deleted_at?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
 }
@@ -543,20 +686,33 @@ export type ExplanationMinOrderByAggregateInput = {
   user_id?: Prisma.SortOrder
   title?: Prisma.SortOrder
   code?: Prisma.SortOrder
-  code_language?: Prisma.SortOrder
-  explanation?: Prisma.SortOrder
+  language?: Prisma.SortOrder
   summary?: Prisma.SortOrder
+  longSummary?: Prisma.SortOrder
   complexity?: Prisma.SortOrder
   optimization_tip?: Prisma.SortOrder
   performance_impact?: Prisma.SortOrder
+  model?: Prisma.SortOrder
   status?: Prisma.SortOrder
   error_message?: Prisma.SortOrder
+  prompt_tokens?: Prisma.SortOrder
+  completion_tokens?: Prisma.SortOrder
+  total_tokens?: Prisma.SortOrder
+  deleted_at?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
 }
 
 export type ExplanationSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  prompt_tokens?: Prisma.SortOrder
+  completion_tokens?: Prisma.SortOrder
+  total_tokens?: Prisma.SortOrder
+}
+
+export type ExplanationScalarRelationFilter = {
+  is?: Prisma.ExplanationWhereInput
+  isNot?: Prisma.ExplanationWhereInput
 }
 
 export type ExplanationCreateNestedManyWithoutUserInput = {
@@ -609,36 +765,72 @@ export type EnumExplanationStatusFieldUpdateOperationsInput = {
   set?: $Enums.ExplanationStatus
 }
 
+export type NullableIntFieldUpdateOperationsInput = {
+  set?: number | null
+  increment?: number
+  decrement?: number
+  multiply?: number
+  divide?: number
+}
+
+export type ExplanationCreateNestedOneWithoutExplanation_stepsInput = {
+  create?: Prisma.XOR<Prisma.ExplanationCreateWithoutExplanation_stepsInput, Prisma.ExplanationUncheckedCreateWithoutExplanation_stepsInput>
+  connectOrCreate?: Prisma.ExplanationCreateOrConnectWithoutExplanation_stepsInput
+  connect?: Prisma.ExplanationWhereUniqueInput
+}
+
+export type ExplanationUpdateOneRequiredWithoutExplanation_stepsNestedInput = {
+  create?: Prisma.XOR<Prisma.ExplanationCreateWithoutExplanation_stepsInput, Prisma.ExplanationUncheckedCreateWithoutExplanation_stepsInput>
+  connectOrCreate?: Prisma.ExplanationCreateOrConnectWithoutExplanation_stepsInput
+  upsert?: Prisma.ExplanationUpsertWithoutExplanation_stepsInput
+  connect?: Prisma.ExplanationWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ExplanationUpdateToOneWithWhereWithoutExplanation_stepsInput, Prisma.ExplanationUpdateWithoutExplanation_stepsInput>, Prisma.ExplanationUncheckedUpdateWithoutExplanation_stepsInput>
+}
+
 export type ExplanationCreateWithoutUserInput = {
   id?: bigint | number
   title: string
   code: string
-  code_language: string
-  explanation: string
+  language: string
   summary: string
+  longSummary: string
   complexity: $Enums.ExplanationComplexity
-  optimization_tip: string
+  optimization_tip?: string | null
   performance_impact: string
+  model: string
+  raw_response_json: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: $Enums.ExplanationStatus
   error_message?: string | null
+  prompt_tokens?: number | null
+  completion_tokens?: number | null
+  total_tokens?: number | null
+  deleted_at?: Date | string | null
   created_at?: Date | string
   updated_at?: Date | string
+  explanation_steps?: Prisma.ExplanationStepCreateNestedManyWithoutExplanationInput
 }
 
 export type ExplanationUncheckedCreateWithoutUserInput = {
   id?: bigint | number
   title: string
   code: string
-  code_language: string
-  explanation: string
+  language: string
   summary: string
+  longSummary: string
   complexity: $Enums.ExplanationComplexity
-  optimization_tip: string
+  optimization_tip?: string | null
   performance_impact: string
+  model: string
+  raw_response_json: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: $Enums.ExplanationStatus
   error_message?: string | null
+  prompt_tokens?: number | null
+  completion_tokens?: number | null
+  total_tokens?: number | null
+  deleted_at?: Date | string | null
   created_at?: Date | string
   updated_at?: Date | string
+  explanation_steps?: Prisma.ExplanationStepUncheckedCreateNestedManyWithoutExplanationInput
 }
 
 export type ExplanationCreateOrConnectWithoutUserInput = {
@@ -675,30 +867,150 @@ export type ExplanationScalarWhereInput = {
   user_id?: Prisma.StringFilter<"Explanation"> | string
   title?: Prisma.StringFilter<"Explanation"> | string
   code?: Prisma.StringFilter<"Explanation"> | string
-  code_language?: Prisma.StringFilter<"Explanation"> | string
-  explanation?: Prisma.StringFilter<"Explanation"> | string
+  language?: Prisma.StringFilter<"Explanation"> | string
   summary?: Prisma.StringFilter<"Explanation"> | string
+  longSummary?: Prisma.StringFilter<"Explanation"> | string
   complexity?: Prisma.EnumExplanationComplexityFilter<"Explanation"> | $Enums.ExplanationComplexity
-  optimization_tip?: Prisma.StringFilter<"Explanation"> | string
+  optimization_tip?: Prisma.StringNullableFilter<"Explanation"> | string | null
   performance_impact?: Prisma.StringFilter<"Explanation"> | string
+  model?: Prisma.StringFilter<"Explanation"> | string
+  raw_response_json?: Prisma.JsonFilter<"Explanation">
   status?: Prisma.EnumExplanationStatusFilter<"Explanation"> | $Enums.ExplanationStatus
   error_message?: Prisma.StringNullableFilter<"Explanation"> | string | null
+  prompt_tokens?: Prisma.IntNullableFilter<"Explanation"> | number | null
+  completion_tokens?: Prisma.IntNullableFilter<"Explanation"> | number | null
+  total_tokens?: Prisma.IntNullableFilter<"Explanation"> | number | null
+  deleted_at?: Prisma.DateTimeNullableFilter<"Explanation"> | Date | string | null
   created_at?: Prisma.DateTimeFilter<"Explanation"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"Explanation"> | Date | string
+}
+
+export type ExplanationCreateWithoutExplanation_stepsInput = {
+  id?: bigint | number
+  title: string
+  code: string
+  language: string
+  summary: string
+  longSummary: string
+  complexity: $Enums.ExplanationComplexity
+  optimization_tip?: string | null
+  performance_impact: string
+  model: string
+  raw_response_json: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  status?: $Enums.ExplanationStatus
+  error_message?: string | null
+  prompt_tokens?: number | null
+  completion_tokens?: number | null
+  total_tokens?: number | null
+  deleted_at?: Date | string | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  user: Prisma.UserCreateNestedOneWithoutExplanationsInput
+}
+
+export type ExplanationUncheckedCreateWithoutExplanation_stepsInput = {
+  id?: bigint | number
+  user_id: string
+  title: string
+  code: string
+  language: string
+  summary: string
+  longSummary: string
+  complexity: $Enums.ExplanationComplexity
+  optimization_tip?: string | null
+  performance_impact: string
+  model: string
+  raw_response_json: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  status?: $Enums.ExplanationStatus
+  error_message?: string | null
+  prompt_tokens?: number | null
+  completion_tokens?: number | null
+  total_tokens?: number | null
+  deleted_at?: Date | string | null
+  created_at?: Date | string
+  updated_at?: Date | string
+}
+
+export type ExplanationCreateOrConnectWithoutExplanation_stepsInput = {
+  where: Prisma.ExplanationWhereUniqueInput
+  create: Prisma.XOR<Prisma.ExplanationCreateWithoutExplanation_stepsInput, Prisma.ExplanationUncheckedCreateWithoutExplanation_stepsInput>
+}
+
+export type ExplanationUpsertWithoutExplanation_stepsInput = {
+  update: Prisma.XOR<Prisma.ExplanationUpdateWithoutExplanation_stepsInput, Prisma.ExplanationUncheckedUpdateWithoutExplanation_stepsInput>
+  create: Prisma.XOR<Prisma.ExplanationCreateWithoutExplanation_stepsInput, Prisma.ExplanationUncheckedCreateWithoutExplanation_stepsInput>
+  where?: Prisma.ExplanationWhereInput
+}
+
+export type ExplanationUpdateToOneWithWhereWithoutExplanation_stepsInput = {
+  where?: Prisma.ExplanationWhereInput
+  data: Prisma.XOR<Prisma.ExplanationUpdateWithoutExplanation_stepsInput, Prisma.ExplanationUncheckedUpdateWithoutExplanation_stepsInput>
+}
+
+export type ExplanationUpdateWithoutExplanation_stepsInput = {
+  id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  language?: Prisma.StringFieldUpdateOperationsInput | string
+  summary?: Prisma.StringFieldUpdateOperationsInput | string
+  longSummary?: Prisma.StringFieldUpdateOperationsInput | string
+  complexity?: Prisma.EnumExplanationComplexityFieldUpdateOperationsInput | $Enums.ExplanationComplexity
+  optimization_tip?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  performance_impact?: Prisma.StringFieldUpdateOperationsInput | string
+  model?: Prisma.StringFieldUpdateOperationsInput | string
+  raw_response_json?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  status?: Prisma.EnumExplanationStatusFieldUpdateOperationsInput | $Enums.ExplanationStatus
+  error_message?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  prompt_tokens?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  completion_tokens?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  total_tokens?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  user?: Prisma.UserUpdateOneRequiredWithoutExplanationsNestedInput
+}
+
+export type ExplanationUncheckedUpdateWithoutExplanation_stepsInput = {
+  id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
+  user_id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  language?: Prisma.StringFieldUpdateOperationsInput | string
+  summary?: Prisma.StringFieldUpdateOperationsInput | string
+  longSummary?: Prisma.StringFieldUpdateOperationsInput | string
+  complexity?: Prisma.EnumExplanationComplexityFieldUpdateOperationsInput | $Enums.ExplanationComplexity
+  optimization_tip?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  performance_impact?: Prisma.StringFieldUpdateOperationsInput | string
+  model?: Prisma.StringFieldUpdateOperationsInput | string
+  raw_response_json?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  status?: Prisma.EnumExplanationStatusFieldUpdateOperationsInput | $Enums.ExplanationStatus
+  error_message?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  prompt_tokens?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  completion_tokens?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  total_tokens?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type ExplanationCreateManyUserInput = {
   id?: bigint | number
   title: string
   code: string
-  code_language: string
-  explanation: string
+  language: string
   summary: string
+  longSummary: string
   complexity: $Enums.ExplanationComplexity
-  optimization_tip: string
+  optimization_tip?: string | null
   performance_impact: string
+  model: string
+  raw_response_json: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: $Enums.ExplanationStatus
   error_message?: string | null
+  prompt_tokens?: number | null
+  completion_tokens?: number | null
+  total_tokens?: number | null
+  deleted_at?: Date | string | null
   created_at?: Date | string
   updated_at?: Date | string
 }
@@ -707,50 +1019,99 @@ export type ExplanationUpdateWithoutUserInput = {
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   title?: Prisma.StringFieldUpdateOperationsInput | string
   code?: Prisma.StringFieldUpdateOperationsInput | string
-  code_language?: Prisma.StringFieldUpdateOperationsInput | string
-  explanation?: Prisma.StringFieldUpdateOperationsInput | string
+  language?: Prisma.StringFieldUpdateOperationsInput | string
   summary?: Prisma.StringFieldUpdateOperationsInput | string
+  longSummary?: Prisma.StringFieldUpdateOperationsInput | string
   complexity?: Prisma.EnumExplanationComplexityFieldUpdateOperationsInput | $Enums.ExplanationComplexity
-  optimization_tip?: Prisma.StringFieldUpdateOperationsInput | string
+  optimization_tip?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   performance_impact?: Prisma.StringFieldUpdateOperationsInput | string
+  model?: Prisma.StringFieldUpdateOperationsInput | string
+  raw_response_json?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: Prisma.EnumExplanationStatusFieldUpdateOperationsInput | $Enums.ExplanationStatus
   error_message?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  prompt_tokens?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  completion_tokens?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  total_tokens?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  explanation_steps?: Prisma.ExplanationStepUpdateManyWithoutExplanationNestedInput
 }
 
 export type ExplanationUncheckedUpdateWithoutUserInput = {
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   title?: Prisma.StringFieldUpdateOperationsInput | string
   code?: Prisma.StringFieldUpdateOperationsInput | string
-  code_language?: Prisma.StringFieldUpdateOperationsInput | string
-  explanation?: Prisma.StringFieldUpdateOperationsInput | string
+  language?: Prisma.StringFieldUpdateOperationsInput | string
   summary?: Prisma.StringFieldUpdateOperationsInput | string
+  longSummary?: Prisma.StringFieldUpdateOperationsInput | string
   complexity?: Prisma.EnumExplanationComplexityFieldUpdateOperationsInput | $Enums.ExplanationComplexity
-  optimization_tip?: Prisma.StringFieldUpdateOperationsInput | string
+  optimization_tip?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   performance_impact?: Prisma.StringFieldUpdateOperationsInput | string
+  model?: Prisma.StringFieldUpdateOperationsInput | string
+  raw_response_json?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: Prisma.EnumExplanationStatusFieldUpdateOperationsInput | $Enums.ExplanationStatus
   error_message?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  prompt_tokens?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  completion_tokens?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  total_tokens?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  explanation_steps?: Prisma.ExplanationStepUncheckedUpdateManyWithoutExplanationNestedInput
 }
 
 export type ExplanationUncheckedUpdateManyWithoutUserInput = {
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   title?: Prisma.StringFieldUpdateOperationsInput | string
   code?: Prisma.StringFieldUpdateOperationsInput | string
-  code_language?: Prisma.StringFieldUpdateOperationsInput | string
-  explanation?: Prisma.StringFieldUpdateOperationsInput | string
+  language?: Prisma.StringFieldUpdateOperationsInput | string
   summary?: Prisma.StringFieldUpdateOperationsInput | string
+  longSummary?: Prisma.StringFieldUpdateOperationsInput | string
   complexity?: Prisma.EnumExplanationComplexityFieldUpdateOperationsInput | $Enums.ExplanationComplexity
-  optimization_tip?: Prisma.StringFieldUpdateOperationsInput | string
+  optimization_tip?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   performance_impact?: Prisma.StringFieldUpdateOperationsInput | string
+  model?: Prisma.StringFieldUpdateOperationsInput | string
+  raw_response_json?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: Prisma.EnumExplanationStatusFieldUpdateOperationsInput | $Enums.ExplanationStatus
   error_message?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  prompt_tokens?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  completion_tokens?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  total_tokens?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
+
+/**
+ * Count Type ExplanationCountOutputType
+ */
+
+export type ExplanationCountOutputType = {
+  explanation_steps: number
+}
+
+export type ExplanationCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  explanation_steps?: boolean | ExplanationCountOutputTypeCountExplanation_stepsArgs
+}
+
+/**
+ * ExplanationCountOutputType without action
+ */
+export type ExplanationCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ExplanationCountOutputType
+   */
+  select?: Prisma.ExplanationCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * ExplanationCountOutputType without action
+ */
+export type ExplanationCountOutputTypeCountExplanation_stepsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ExplanationStepWhereInput
+}
 
 
 export type ExplanationSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -758,17 +1119,25 @@ export type ExplanationSelect<ExtArgs extends runtime.Types.Extensions.InternalA
   user_id?: boolean
   title?: boolean
   code?: boolean
-  code_language?: boolean
-  explanation?: boolean
+  language?: boolean
   summary?: boolean
+  longSummary?: boolean
   complexity?: boolean
   optimization_tip?: boolean
   performance_impact?: boolean
+  model?: boolean
+  raw_response_json?: boolean
   status?: boolean
   error_message?: boolean
+  prompt_tokens?: boolean
+  completion_tokens?: boolean
+  total_tokens?: boolean
+  deleted_at?: boolean
   created_at?: boolean
   updated_at?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  explanation_steps?: boolean | Prisma.Explanation$explanation_stepsArgs<ExtArgs>
+  _count?: boolean | Prisma.ExplanationCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["explanation"]>
 
 export type ExplanationSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -776,14 +1145,20 @@ export type ExplanationSelectCreateManyAndReturn<ExtArgs extends runtime.Types.E
   user_id?: boolean
   title?: boolean
   code?: boolean
-  code_language?: boolean
-  explanation?: boolean
+  language?: boolean
   summary?: boolean
+  longSummary?: boolean
   complexity?: boolean
   optimization_tip?: boolean
   performance_impact?: boolean
+  model?: boolean
+  raw_response_json?: boolean
   status?: boolean
   error_message?: boolean
+  prompt_tokens?: boolean
+  completion_tokens?: boolean
+  total_tokens?: boolean
+  deleted_at?: boolean
   created_at?: boolean
   updated_at?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -794,14 +1169,20 @@ export type ExplanationSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.E
   user_id?: boolean
   title?: boolean
   code?: boolean
-  code_language?: boolean
-  explanation?: boolean
+  language?: boolean
   summary?: boolean
+  longSummary?: boolean
   complexity?: boolean
   optimization_tip?: boolean
   performance_impact?: boolean
+  model?: boolean
+  raw_response_json?: boolean
   status?: boolean
   error_message?: boolean
+  prompt_tokens?: boolean
+  completion_tokens?: boolean
+  total_tokens?: boolean
+  deleted_at?: boolean
   created_at?: boolean
   updated_at?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -812,21 +1193,29 @@ export type ExplanationSelectScalar = {
   user_id?: boolean
   title?: boolean
   code?: boolean
-  code_language?: boolean
-  explanation?: boolean
+  language?: boolean
   summary?: boolean
+  longSummary?: boolean
   complexity?: boolean
   optimization_tip?: boolean
   performance_impact?: boolean
+  model?: boolean
+  raw_response_json?: boolean
   status?: boolean
   error_message?: boolean
+  prompt_tokens?: boolean
+  completion_tokens?: boolean
+  total_tokens?: boolean
+  deleted_at?: boolean
   created_at?: boolean
   updated_at?: boolean
 }
 
-export type ExplanationOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "user_id" | "title" | "code" | "code_language" | "explanation" | "summary" | "complexity" | "optimization_tip" | "performance_impact" | "status" | "error_message" | "created_at" | "updated_at", ExtArgs["result"]["explanation"]>
+export type ExplanationOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "user_id" | "title" | "code" | "language" | "summary" | "longSummary" | "complexity" | "optimization_tip" | "performance_impact" | "model" | "raw_response_json" | "status" | "error_message" | "prompt_tokens" | "completion_tokens" | "total_tokens" | "deleted_at" | "created_at" | "updated_at", ExtArgs["result"]["explanation"]>
 export type ExplanationInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  explanation_steps?: boolean | Prisma.Explanation$explanation_stepsArgs<ExtArgs>
+  _count?: boolean | Prisma.ExplanationCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type ExplanationIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -839,20 +1228,27 @@ export type $ExplanationPayload<ExtArgs extends runtime.Types.Extensions.Interna
   name: "Explanation"
   objects: {
     user: Prisma.$UserPayload<ExtArgs>
+    explanation_steps: Prisma.$ExplanationStepPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: bigint
     user_id: string
     title: string
     code: string
-    code_language: string
-    explanation: string
+    language: string
     summary: string
+    longSummary: string
     complexity: $Enums.ExplanationComplexity
-    optimization_tip: string
+    optimization_tip: string | null
     performance_impact: string
+    model: string
+    raw_response_json: runtime.JsonValue
     status: $Enums.ExplanationStatus
     error_message: string | null
+    prompt_tokens: number | null
+    completion_tokens: number | null
+    total_tokens: number | null
+    deleted_at: Date | null
     created_at: Date
     updated_at: Date
   }, ExtArgs["result"]["explanation"]>
@@ -1250,6 +1646,7 @@ readonly fields: ExplanationFieldRefs;
 export interface Prisma__ExplanationClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  explanation_steps<T extends Prisma.Explanation$explanation_stepsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Explanation$explanation_stepsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ExplanationStepPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1283,14 +1680,20 @@ export interface ExplanationFieldRefs {
   readonly user_id: Prisma.FieldRef<"Explanation", 'String'>
   readonly title: Prisma.FieldRef<"Explanation", 'String'>
   readonly code: Prisma.FieldRef<"Explanation", 'String'>
-  readonly code_language: Prisma.FieldRef<"Explanation", 'String'>
-  readonly explanation: Prisma.FieldRef<"Explanation", 'String'>
+  readonly language: Prisma.FieldRef<"Explanation", 'String'>
   readonly summary: Prisma.FieldRef<"Explanation", 'String'>
+  readonly longSummary: Prisma.FieldRef<"Explanation", 'String'>
   readonly complexity: Prisma.FieldRef<"Explanation", 'ExplanationComplexity'>
   readonly optimization_tip: Prisma.FieldRef<"Explanation", 'String'>
   readonly performance_impact: Prisma.FieldRef<"Explanation", 'String'>
+  readonly model: Prisma.FieldRef<"Explanation", 'String'>
+  readonly raw_response_json: Prisma.FieldRef<"Explanation", 'Json'>
   readonly status: Prisma.FieldRef<"Explanation", 'ExplanationStatus'>
   readonly error_message: Prisma.FieldRef<"Explanation", 'String'>
+  readonly prompt_tokens: Prisma.FieldRef<"Explanation", 'Int'>
+  readonly completion_tokens: Prisma.FieldRef<"Explanation", 'Int'>
+  readonly total_tokens: Prisma.FieldRef<"Explanation", 'Int'>
+  readonly deleted_at: Prisma.FieldRef<"Explanation", 'DateTime'>
   readonly created_at: Prisma.FieldRef<"Explanation", 'DateTime'>
   readonly updated_at: Prisma.FieldRef<"Explanation", 'DateTime'>
 }
@@ -1691,6 +2094,30 @@ export type ExplanationDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.I
    * Limit how many Explanations to delete.
    */
   limit?: number
+}
+
+/**
+ * Explanation.explanation_steps
+ */
+export type Explanation$explanation_stepsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ExplanationStep
+   */
+  select?: Prisma.ExplanationStepSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ExplanationStep
+   */
+  omit?: Prisma.ExplanationStepOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ExplanationStepInclude<ExtArgs> | null
+  where?: Prisma.ExplanationStepWhereInput
+  orderBy?: Prisma.ExplanationStepOrderByWithRelationInput | Prisma.ExplanationStepOrderByWithRelationInput[]
+  cursor?: Prisma.ExplanationStepWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ExplanationStepScalarFieldEnum | Prisma.ExplanationStepScalarFieldEnum[]
 }
 
 /**

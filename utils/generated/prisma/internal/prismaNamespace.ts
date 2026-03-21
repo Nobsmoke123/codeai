@@ -389,7 +389,8 @@ export const ModelName = {
   Account: 'Account',
   Verification: 'Verification',
   Profile: 'Profile',
-  Explanation: 'Explanation'
+  Explanation: 'Explanation',
+  ExplanationStep: 'ExplanationStep'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -405,7 +406,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "session" | "account" | "verification" | "profile" | "explanation"
+    modelProps: "user" | "session" | "account" | "verification" | "profile" | "explanation" | "explanationStep"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -853,6 +854,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    ExplanationStep: {
+      payload: Prisma.$ExplanationStepPayload<ExtArgs>
+      fields: Prisma.ExplanationStepFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ExplanationStepFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ExplanationStepPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ExplanationStepFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ExplanationStepPayload>
+        }
+        findFirst: {
+          args: Prisma.ExplanationStepFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ExplanationStepPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ExplanationStepFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ExplanationStepPayload>
+        }
+        findMany: {
+          args: Prisma.ExplanationStepFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ExplanationStepPayload>[]
+        }
+        create: {
+          args: Prisma.ExplanationStepCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ExplanationStepPayload>
+        }
+        createMany: {
+          args: Prisma.ExplanationStepCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ExplanationStepCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ExplanationStepPayload>[]
+        }
+        delete: {
+          args: Prisma.ExplanationStepDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ExplanationStepPayload>
+        }
+        update: {
+          args: Prisma.ExplanationStepUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ExplanationStepPayload>
+        }
+        deleteMany: {
+          args: Prisma.ExplanationStepDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ExplanationStepUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ExplanationStepUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ExplanationStepPayload>[]
+        }
+        upsert: {
+          args: Prisma.ExplanationStepUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ExplanationStepPayload>
+        }
+        aggregate: {
+          args: Prisma.ExplanationStepAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateExplanationStep>
+        }
+        groupBy: {
+          args: Prisma.ExplanationStepGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ExplanationStepGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ExplanationStepCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ExplanationStepCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -969,19 +1044,39 @@ export const ExplanationScalarFieldEnum = {
   user_id: 'user_id',
   title: 'title',
   code: 'code',
-  code_language: 'code_language',
-  explanation: 'explanation',
+  language: 'language',
   summary: 'summary',
+  longSummary: 'longSummary',
   complexity: 'complexity',
   optimization_tip: 'optimization_tip',
   performance_impact: 'performance_impact',
+  model: 'model',
+  raw_response_json: 'raw_response_json',
   status: 'status',
   error_message: 'error_message',
+  prompt_tokens: 'prompt_tokens',
+  completion_tokens: 'completion_tokens',
+  total_tokens: 'total_tokens',
+  deleted_at: 'deleted_at',
   created_at: 'created_at',
   updated_at: 'updated_at'
 } as const
 
 export type ExplanationScalarFieldEnum = (typeof ExplanationScalarFieldEnum)[keyof typeof ExplanationScalarFieldEnum]
+
+
+export const ExplanationStepScalarFieldEnum = {
+  id: 'id',
+  explanation_id: 'explanation_id',
+  step_number: 'step_number',
+  line_start: 'line_start',
+  line_end: 'line_end',
+  text: 'text',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type ExplanationStepScalarFieldEnum = (typeof ExplanationStepScalarFieldEnum)[keyof typeof ExplanationStepScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -990,6 +1085,13 @@ export const SortOrder = {
 } as const
 
 export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
+
+
+export const JsonNullValueInput = {
+  JsonNull: JsonNull
+} as const
+
+export type JsonNullValueInput = (typeof JsonNullValueInput)[keyof typeof JsonNullValueInput]
 
 
 export const QueryMode = {
@@ -1006,6 +1108,15 @@ export const NullsOrder = {
 } as const
 
 export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
+
+
+export const JsonNullValueFilter = {
+  DbNull: DbNull,
+  JsonNull: JsonNull,
+  AnyNull: AnyNull
+} as const
+
+export type JsonNullValueFilter = (typeof JsonNullValueFilter)[keyof typeof JsonNullValueFilter]
 
 
 
@@ -1074,6 +1185,20 @@ export type EnumExplanationComplexityFieldRefInput<$PrismaModel> = FieldRefInput
  * Reference to a field of type 'ExplanationComplexity[]'
  */
 export type ListEnumExplanationComplexityFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ExplanationComplexity[]'>
+    
+
+
+/**
+ * Reference to a field of type 'Json'
+ */
+export type JsonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Json'>
+    
+
+
+/**
+ * Reference to a field of type 'QueryMode'
+ */
+export type EnumQueryModeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'QueryMode'>
     
 
 
@@ -1219,6 +1344,7 @@ export type GlobalOmitConfig = {
   verification?: Prisma.VerificationOmit
   profile?: Prisma.ProfileOmit
   explanation?: Prisma.ExplanationOmit
+  explanationStep?: Prisma.ExplanationStepOmit
 }
 
 /* Types for Logging */
