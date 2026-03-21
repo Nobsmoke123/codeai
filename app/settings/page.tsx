@@ -1,12 +1,9 @@
-"use client";
-
 import Navigation from "@/components/ui/Navigation";
 import { getServerSession } from "@/lib/session";
 import { redirect } from "next/navigation";
-import { BiMenu, BiSolidFile } from "react-icons/bi";
+import { BiSolidFile } from "react-icons/bi";
 import { BsGlobe } from "react-icons/bs";
 import {
-  MdChevronLeft,
   MdChevronRight,
   MdCode,
   MdCreate,
@@ -97,11 +94,7 @@ const SettingsPage = async () => {
                 </div>
               </div>
               <label className="relative inline-flex items-center cursor-pointer">
-                <input
-                  onChange={() => {}}
-                  className="sr-only ios-switch"
-                  type="checkbox"
-                />
+                <input className="sr-only ios-switch" type="checkbox" />
                 <div className="ios-switch-bg w-11 h-6 bg-slate-300 dark:bg-slate-700 rounded-full transition-colors duration-200">
                   <div className="ios-switch-dot absolute left-[2px] top-[2px] bg-white w-5 h-5 rounded-full shadow transition-transform duration-200"></div>
                 </div>

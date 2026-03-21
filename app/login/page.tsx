@@ -1,6 +1,8 @@
+"use client";
 import AuthenticationNav from "@/components/ui/AuthenticationNav";
+import { signIn } from "@/lib/auth-client";
 import Link from "next/link";
-import { BiLogoGithub, BiLogoGoogle, BiTerminal } from "react-icons/bi";
+import { BiLogoGithub, BiLogoGoogle } from "react-icons/bi";
 
 const LoginPage = () => {
   return (
@@ -73,13 +75,32 @@ const LoginPage = () => {
             </div>
 
             <div className="grid grid-cols-2 gap-4">
-              <button className="flex items-center justify-center gap-2 py-3 px-4 rounded-lg bg-[#11131b] ring-1 ring-outline-variant hover:bg-[#191b24] transition-colors active:scale-95 group">
+              {/* Google button */}
+              <button
+                onClick={() =>
+                  signIn.social({
+                    provider: "google",
+                    callbackURL: "/explainer",
+                  })
+                }
+                className="flex items-center justify-center gap-2 py-3 px-4 rounded-lg bg-[#11131b] ring-1 ring-outline-variant hover:bg-[#191b24] transition-colors active:scale-95 group"
+              >
                 <BiLogoGoogle className="" />
                 <span className="text-[10px] font-black tracking-widest uppercase text-[#94a3b8]">
                   Google
                 </span>
               </button>
-              <button className="flex items-center justify-center gap-2 py-3 px-4 rounded-lg bg-[#11131b] ring-1 ring-outline-variant hover:bg-[#191b24] transition-colors active:scale-95 group">
+
+              {/* Github button */}
+              <button
+                onClick={() =>
+                  signIn.social({
+                    provider: "github",
+                    callbackURL: "/explainer",
+                  })
+                }
+                className="flex items-center justify-center gap-2 py-3 px-4 rounded-lg bg-[#11131b] ring-1 ring-outline-variant hover:bg-[#191b24] transition-colors active:scale-95 group"
+              >
                 <BiLogoGithub className="" />
                 <span className="text-[10px] font-black tracking-widest uppercase text-[#94a3b8]">
                   GitHub

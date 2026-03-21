@@ -1,13 +1,15 @@
+"use client";
+
 import Features from "@/components/layouts/Features";
 import Hero from "@/components/layouts/Hero";
-import { getServerSession } from "@/lib/session";
+import { signOut, useSession } from "@/lib/auth-client";
 import Link from "next/link";
 import { BiTerminal } from "react-icons/bi";
 import { BsCodeSlash, BsTencentQq, BsTerminal, BsUbuntu } from "react-icons/bs";
 import { MdHub } from "react-icons/md";
 
-export default async function Home() {
-  const session = await getServerSession();
+export default function Home() {
+  const { data: session, isPending, error, refetch } = useSession();
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-background-dark font-sans dark:bg-black">
@@ -43,6 +45,14 @@ export default async function Home() {
                   className="p-2 text-white rounded-md text-sm tracking-tight"
                 >
                   Settings
+                </Link>
+
+                <Link
+                  href={""}
+                  onClick={() => signOut()}
+                  className="p-2 bg-blue-600/30 text-white rounded-md text-sm tracking-tight"
+                >
+                  Sign Out
                 </Link>
               </>
             ) : (

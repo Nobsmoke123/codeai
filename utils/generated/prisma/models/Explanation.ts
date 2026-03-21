@@ -288,6 +288,7 @@ export type ExplanationWhereInput = {
   error_message?: Prisma.StringNullableFilter<"Explanation"> | string | null
   created_at?: Prisma.DateTimeFilter<"Explanation"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"Explanation"> | Date | string
+  user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
 }
 
 export type ExplanationOrderByWithRelationInput = {
@@ -305,14 +306,15 @@ export type ExplanationOrderByWithRelationInput = {
   error_message?: Prisma.SortOrderInput | Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
+  user?: Prisma.UserOrderByWithRelationInput
 }
 
 export type ExplanationWhereUniqueInput = Prisma.AtLeast<{
   id?: bigint | number
+  user_id?: string
   AND?: Prisma.ExplanationWhereInput | Prisma.ExplanationWhereInput[]
   OR?: Prisma.ExplanationWhereInput[]
   NOT?: Prisma.ExplanationWhereInput | Prisma.ExplanationWhereInput[]
-  user_id?: Prisma.StringFilter<"Explanation"> | string
   title?: Prisma.StringFilter<"Explanation"> | string
   code?: Prisma.StringFilter<"Explanation"> | string
   code_language?: Prisma.StringFilter<"Explanation"> | string
@@ -325,7 +327,8 @@ export type ExplanationWhereUniqueInput = Prisma.AtLeast<{
   error_message?: Prisma.StringNullableFilter<"Explanation"> | string | null
   created_at?: Prisma.DateTimeFilter<"Explanation"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"Explanation"> | Date | string
-}, "id">
+  user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+}, "id" | "user_id">
 
 export type ExplanationOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
@@ -371,7 +374,6 @@ export type ExplanationScalarWhereWithAggregatesInput = {
 
 export type ExplanationCreateInput = {
   id?: bigint | number
-  user_id: string
   title: string
   code: string
   code_language: string
@@ -384,6 +386,7 @@ export type ExplanationCreateInput = {
   error_message?: string | null
   created_at?: Date | string
   updated_at?: Date | string
+  user: Prisma.UserCreateNestedOneWithoutExplanationsInput
 }
 
 export type ExplanationUncheckedCreateInput = {
@@ -405,7 +408,6 @@ export type ExplanationUncheckedCreateInput = {
 
 export type ExplanationUpdateInput = {
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
-  user_id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   code?: Prisma.StringFieldUpdateOperationsInput | string
   code_language?: Prisma.StringFieldUpdateOperationsInput | string
@@ -418,6 +420,7 @@ export type ExplanationUpdateInput = {
   error_message?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  user?: Prisma.UserUpdateOneRequiredWithoutExplanationsNestedInput
 }
 
 export type ExplanationUncheckedUpdateInput = {
@@ -456,7 +459,6 @@ export type ExplanationCreateManyInput = {
 
 export type ExplanationUpdateManyMutationInput = {
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
-  user_id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   code?: Prisma.StringFieldUpdateOperationsInput | string
   code_language?: Prisma.StringFieldUpdateOperationsInput | string
@@ -486,6 +488,16 @@ export type ExplanationUncheckedUpdateManyInput = {
   error_message?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type ExplanationListRelationFilter = {
+  every?: Prisma.ExplanationWhereInput
+  some?: Prisma.ExplanationWhereInput
+  none?: Prisma.ExplanationWhereInput
+}
+
+export type ExplanationOrderByRelationAggregateInput = {
+  _count?: Prisma.SortOrder
 }
 
 export type ExplanationCountOrderByAggregateInput = {
@@ -547,6 +559,48 @@ export type ExplanationSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
 }
 
+export type ExplanationCreateNestedManyWithoutUserInput = {
+  create?: Prisma.XOR<Prisma.ExplanationCreateWithoutUserInput, Prisma.ExplanationUncheckedCreateWithoutUserInput> | Prisma.ExplanationCreateWithoutUserInput[] | Prisma.ExplanationUncheckedCreateWithoutUserInput[]
+  connectOrCreate?: Prisma.ExplanationCreateOrConnectWithoutUserInput | Prisma.ExplanationCreateOrConnectWithoutUserInput[]
+  createMany?: Prisma.ExplanationCreateManyUserInputEnvelope
+  connect?: Prisma.ExplanationWhereUniqueInput | Prisma.ExplanationWhereUniqueInput[]
+}
+
+export type ExplanationUncheckedCreateNestedManyWithoutUserInput = {
+  create?: Prisma.XOR<Prisma.ExplanationCreateWithoutUserInput, Prisma.ExplanationUncheckedCreateWithoutUserInput> | Prisma.ExplanationCreateWithoutUserInput[] | Prisma.ExplanationUncheckedCreateWithoutUserInput[]
+  connectOrCreate?: Prisma.ExplanationCreateOrConnectWithoutUserInput | Prisma.ExplanationCreateOrConnectWithoutUserInput[]
+  createMany?: Prisma.ExplanationCreateManyUserInputEnvelope
+  connect?: Prisma.ExplanationWhereUniqueInput | Prisma.ExplanationWhereUniqueInput[]
+}
+
+export type ExplanationUpdateManyWithoutUserNestedInput = {
+  create?: Prisma.XOR<Prisma.ExplanationCreateWithoutUserInput, Prisma.ExplanationUncheckedCreateWithoutUserInput> | Prisma.ExplanationCreateWithoutUserInput[] | Prisma.ExplanationUncheckedCreateWithoutUserInput[]
+  connectOrCreate?: Prisma.ExplanationCreateOrConnectWithoutUserInput | Prisma.ExplanationCreateOrConnectWithoutUserInput[]
+  upsert?: Prisma.ExplanationUpsertWithWhereUniqueWithoutUserInput | Prisma.ExplanationUpsertWithWhereUniqueWithoutUserInput[]
+  createMany?: Prisma.ExplanationCreateManyUserInputEnvelope
+  set?: Prisma.ExplanationWhereUniqueInput | Prisma.ExplanationWhereUniqueInput[]
+  disconnect?: Prisma.ExplanationWhereUniqueInput | Prisma.ExplanationWhereUniqueInput[]
+  delete?: Prisma.ExplanationWhereUniqueInput | Prisma.ExplanationWhereUniqueInput[]
+  connect?: Prisma.ExplanationWhereUniqueInput | Prisma.ExplanationWhereUniqueInput[]
+  update?: Prisma.ExplanationUpdateWithWhereUniqueWithoutUserInput | Prisma.ExplanationUpdateWithWhereUniqueWithoutUserInput[]
+  updateMany?: Prisma.ExplanationUpdateManyWithWhereWithoutUserInput | Prisma.ExplanationUpdateManyWithWhereWithoutUserInput[]
+  deleteMany?: Prisma.ExplanationScalarWhereInput | Prisma.ExplanationScalarWhereInput[]
+}
+
+export type ExplanationUncheckedUpdateManyWithoutUserNestedInput = {
+  create?: Prisma.XOR<Prisma.ExplanationCreateWithoutUserInput, Prisma.ExplanationUncheckedCreateWithoutUserInput> | Prisma.ExplanationCreateWithoutUserInput[] | Prisma.ExplanationUncheckedCreateWithoutUserInput[]
+  connectOrCreate?: Prisma.ExplanationCreateOrConnectWithoutUserInput | Prisma.ExplanationCreateOrConnectWithoutUserInput[]
+  upsert?: Prisma.ExplanationUpsertWithWhereUniqueWithoutUserInput | Prisma.ExplanationUpsertWithWhereUniqueWithoutUserInput[]
+  createMany?: Prisma.ExplanationCreateManyUserInputEnvelope
+  set?: Prisma.ExplanationWhereUniqueInput | Prisma.ExplanationWhereUniqueInput[]
+  disconnect?: Prisma.ExplanationWhereUniqueInput | Prisma.ExplanationWhereUniqueInput[]
+  delete?: Prisma.ExplanationWhereUniqueInput | Prisma.ExplanationWhereUniqueInput[]
+  connect?: Prisma.ExplanationWhereUniqueInput | Prisma.ExplanationWhereUniqueInput[]
+  update?: Prisma.ExplanationUpdateWithWhereUniqueWithoutUserInput | Prisma.ExplanationUpdateWithWhereUniqueWithoutUserInput[]
+  updateMany?: Prisma.ExplanationUpdateManyWithWhereWithoutUserInput | Prisma.ExplanationUpdateManyWithWhereWithoutUserInput[]
+  deleteMany?: Prisma.ExplanationScalarWhereInput | Prisma.ExplanationScalarWhereInput[]
+}
+
 export type EnumExplanationComplexityFieldUpdateOperationsInput = {
   set?: $Enums.ExplanationComplexity
 }
@@ -555,8 +609,146 @@ export type EnumExplanationStatusFieldUpdateOperationsInput = {
   set?: $Enums.ExplanationStatus
 }
 
-export type NullableStringFieldUpdateOperationsInput = {
-  set?: string | null
+export type ExplanationCreateWithoutUserInput = {
+  id?: bigint | number
+  title: string
+  code: string
+  code_language: string
+  explanation: string
+  summary: string
+  complexity: $Enums.ExplanationComplexity
+  optimization_tip: string
+  performance_impact: string
+  status?: $Enums.ExplanationStatus
+  error_message?: string | null
+  created_at?: Date | string
+  updated_at?: Date | string
+}
+
+export type ExplanationUncheckedCreateWithoutUserInput = {
+  id?: bigint | number
+  title: string
+  code: string
+  code_language: string
+  explanation: string
+  summary: string
+  complexity: $Enums.ExplanationComplexity
+  optimization_tip: string
+  performance_impact: string
+  status?: $Enums.ExplanationStatus
+  error_message?: string | null
+  created_at?: Date | string
+  updated_at?: Date | string
+}
+
+export type ExplanationCreateOrConnectWithoutUserInput = {
+  where: Prisma.ExplanationWhereUniqueInput
+  create: Prisma.XOR<Prisma.ExplanationCreateWithoutUserInput, Prisma.ExplanationUncheckedCreateWithoutUserInput>
+}
+
+export type ExplanationCreateManyUserInputEnvelope = {
+  data: Prisma.ExplanationCreateManyUserInput | Prisma.ExplanationCreateManyUserInput[]
+  skipDuplicates?: boolean
+}
+
+export type ExplanationUpsertWithWhereUniqueWithoutUserInput = {
+  where: Prisma.ExplanationWhereUniqueInput
+  update: Prisma.XOR<Prisma.ExplanationUpdateWithoutUserInput, Prisma.ExplanationUncheckedUpdateWithoutUserInput>
+  create: Prisma.XOR<Prisma.ExplanationCreateWithoutUserInput, Prisma.ExplanationUncheckedCreateWithoutUserInput>
+}
+
+export type ExplanationUpdateWithWhereUniqueWithoutUserInput = {
+  where: Prisma.ExplanationWhereUniqueInput
+  data: Prisma.XOR<Prisma.ExplanationUpdateWithoutUserInput, Prisma.ExplanationUncheckedUpdateWithoutUserInput>
+}
+
+export type ExplanationUpdateManyWithWhereWithoutUserInput = {
+  where: Prisma.ExplanationScalarWhereInput
+  data: Prisma.XOR<Prisma.ExplanationUpdateManyMutationInput, Prisma.ExplanationUncheckedUpdateManyWithoutUserInput>
+}
+
+export type ExplanationScalarWhereInput = {
+  AND?: Prisma.ExplanationScalarWhereInput | Prisma.ExplanationScalarWhereInput[]
+  OR?: Prisma.ExplanationScalarWhereInput[]
+  NOT?: Prisma.ExplanationScalarWhereInput | Prisma.ExplanationScalarWhereInput[]
+  id?: Prisma.BigIntFilter<"Explanation"> | bigint | number
+  user_id?: Prisma.StringFilter<"Explanation"> | string
+  title?: Prisma.StringFilter<"Explanation"> | string
+  code?: Prisma.StringFilter<"Explanation"> | string
+  code_language?: Prisma.StringFilter<"Explanation"> | string
+  explanation?: Prisma.StringFilter<"Explanation"> | string
+  summary?: Prisma.StringFilter<"Explanation"> | string
+  complexity?: Prisma.EnumExplanationComplexityFilter<"Explanation"> | $Enums.ExplanationComplexity
+  optimization_tip?: Prisma.StringFilter<"Explanation"> | string
+  performance_impact?: Prisma.StringFilter<"Explanation"> | string
+  status?: Prisma.EnumExplanationStatusFilter<"Explanation"> | $Enums.ExplanationStatus
+  error_message?: Prisma.StringNullableFilter<"Explanation"> | string | null
+  created_at?: Prisma.DateTimeFilter<"Explanation"> | Date | string
+  updated_at?: Prisma.DateTimeFilter<"Explanation"> | Date | string
+}
+
+export type ExplanationCreateManyUserInput = {
+  id?: bigint | number
+  title: string
+  code: string
+  code_language: string
+  explanation: string
+  summary: string
+  complexity: $Enums.ExplanationComplexity
+  optimization_tip: string
+  performance_impact: string
+  status?: $Enums.ExplanationStatus
+  error_message?: string | null
+  created_at?: Date | string
+  updated_at?: Date | string
+}
+
+export type ExplanationUpdateWithoutUserInput = {
+  id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  code_language?: Prisma.StringFieldUpdateOperationsInput | string
+  explanation?: Prisma.StringFieldUpdateOperationsInput | string
+  summary?: Prisma.StringFieldUpdateOperationsInput | string
+  complexity?: Prisma.EnumExplanationComplexityFieldUpdateOperationsInput | $Enums.ExplanationComplexity
+  optimization_tip?: Prisma.StringFieldUpdateOperationsInput | string
+  performance_impact?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumExplanationStatusFieldUpdateOperationsInput | $Enums.ExplanationStatus
+  error_message?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type ExplanationUncheckedUpdateWithoutUserInput = {
+  id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  code_language?: Prisma.StringFieldUpdateOperationsInput | string
+  explanation?: Prisma.StringFieldUpdateOperationsInput | string
+  summary?: Prisma.StringFieldUpdateOperationsInput | string
+  complexity?: Prisma.EnumExplanationComplexityFieldUpdateOperationsInput | $Enums.ExplanationComplexity
+  optimization_tip?: Prisma.StringFieldUpdateOperationsInput | string
+  performance_impact?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumExplanationStatusFieldUpdateOperationsInput | $Enums.ExplanationStatus
+  error_message?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type ExplanationUncheckedUpdateManyWithoutUserInput = {
+  id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  code_language?: Prisma.StringFieldUpdateOperationsInput | string
+  explanation?: Prisma.StringFieldUpdateOperationsInput | string
+  summary?: Prisma.StringFieldUpdateOperationsInput | string
+  complexity?: Prisma.EnumExplanationComplexityFieldUpdateOperationsInput | $Enums.ExplanationComplexity
+  optimization_tip?: Prisma.StringFieldUpdateOperationsInput | string
+  performance_impact?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumExplanationStatusFieldUpdateOperationsInput | $Enums.ExplanationStatus
+  error_message?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 
@@ -576,6 +768,7 @@ export type ExplanationSelect<ExtArgs extends runtime.Types.Extensions.InternalA
   error_message?: boolean
   created_at?: boolean
   updated_at?: boolean
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["explanation"]>
 
 export type ExplanationSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -593,6 +786,7 @@ export type ExplanationSelectCreateManyAndReturn<ExtArgs extends runtime.Types.E
   error_message?: boolean
   created_at?: boolean
   updated_at?: boolean
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["explanation"]>
 
 export type ExplanationSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -610,6 +804,7 @@ export type ExplanationSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.E
   error_message?: boolean
   created_at?: boolean
   updated_at?: boolean
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["explanation"]>
 
 export type ExplanationSelectScalar = {
@@ -630,10 +825,21 @@ export type ExplanationSelectScalar = {
 }
 
 export type ExplanationOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "user_id" | "title" | "code" | "code_language" | "explanation" | "summary" | "complexity" | "optimization_tip" | "performance_impact" | "status" | "error_message" | "created_at" | "updated_at", ExtArgs["result"]["explanation"]>
+export type ExplanationInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+}
+export type ExplanationIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+}
+export type ExplanationIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+}
 
 export type $ExplanationPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Explanation"
-  objects: {}
+  objects: {
+    user: Prisma.$UserPayload<ExtArgs>
+  }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: bigint
     user_id: string
@@ -1043,6 +1249,7 @@ readonly fields: ExplanationFieldRefs;
  */
 export interface Prisma__ExplanationClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1103,6 +1310,10 @@ export type ExplanationFindUniqueArgs<ExtArgs extends runtime.Types.Extensions.I
    */
   omit?: Prisma.ExplanationOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ExplanationInclude<ExtArgs> | null
+  /**
    * Filter, which Explanation to fetch.
    */
   where: Prisma.ExplanationWhereUniqueInput
@@ -1121,6 +1332,10 @@ export type ExplanationFindUniqueOrThrowArgs<ExtArgs extends runtime.Types.Exten
    */
   omit?: Prisma.ExplanationOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ExplanationInclude<ExtArgs> | null
+  /**
    * Filter, which Explanation to fetch.
    */
   where: Prisma.ExplanationWhereUniqueInput
@@ -1138,6 +1353,10 @@ export type ExplanationFindFirstArgs<ExtArgs extends runtime.Types.Extensions.In
    * Omit specific fields from the Explanation
    */
   omit?: Prisma.ExplanationOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ExplanationInclude<ExtArgs> | null
   /**
    * Filter, which Explanation to fetch.
    */
@@ -1187,6 +1406,10 @@ export type ExplanationFindFirstOrThrowArgs<ExtArgs extends runtime.Types.Extens
    */
   omit?: Prisma.ExplanationOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ExplanationInclude<ExtArgs> | null
+  /**
    * Filter, which Explanation to fetch.
    */
   where?: Prisma.ExplanationWhereInput
@@ -1234,6 +1457,10 @@ export type ExplanationFindManyArgs<ExtArgs extends runtime.Types.Extensions.Int
    * Omit specific fields from the Explanation
    */
   omit?: Prisma.ExplanationOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ExplanationInclude<ExtArgs> | null
   /**
    * Filter, which Explanations to fetch.
    */
@@ -1283,6 +1510,10 @@ export type ExplanationCreateArgs<ExtArgs extends runtime.Types.Extensions.Inter
    */
   omit?: Prisma.ExplanationOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ExplanationInclude<ExtArgs> | null
+  /**
    * The data needed to create a Explanation.
    */
   data: Prisma.XOR<Prisma.ExplanationCreateInput, Prisma.ExplanationUncheckedCreateInput>
@@ -1316,6 +1547,10 @@ export type ExplanationCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Ext
    */
   data: Prisma.ExplanationCreateManyInput | Prisma.ExplanationCreateManyInput[]
   skipDuplicates?: boolean
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ExplanationIncludeCreateManyAndReturn<ExtArgs> | null
 }
 
 /**
@@ -1330,6 +1565,10 @@ export type ExplanationUpdateArgs<ExtArgs extends runtime.Types.Extensions.Inter
    * Omit specific fields from the Explanation
    */
   omit?: Prisma.ExplanationOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ExplanationInclude<ExtArgs> | null
   /**
    * The data needed to update a Explanation.
    */
@@ -1382,6 +1621,10 @@ export type ExplanationUpdateManyAndReturnArgs<ExtArgs extends runtime.Types.Ext
    * Limit how many Explanations to update.
    */
   limit?: number
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ExplanationIncludeUpdateManyAndReturn<ExtArgs> | null
 }
 
 /**
@@ -1396,6 +1639,10 @@ export type ExplanationUpsertArgs<ExtArgs extends runtime.Types.Extensions.Inter
    * Omit specific fields from the Explanation
    */
   omit?: Prisma.ExplanationOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ExplanationInclude<ExtArgs> | null
   /**
    * The filter to search for the Explanation to update in case it exists.
    */
@@ -1422,6 +1669,10 @@ export type ExplanationDeleteArgs<ExtArgs extends runtime.Types.Extensions.Inter
    * Omit specific fields from the Explanation
    */
   omit?: Prisma.ExplanationOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ExplanationInclude<ExtArgs> | null
   /**
    * Filter which Explanation to delete.
    */
@@ -1454,4 +1705,8 @@ export type ExplanationDefaultArgs<ExtArgs extends runtime.Types.Extensions.Inte
    * Omit specific fields from the Explanation
    */
   omit?: Prisma.ExplanationOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ExplanationInclude<ExtArgs> | null
 }

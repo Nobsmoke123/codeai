@@ -1,9 +1,11 @@
-import { getServerSession } from "@/lib/session";
+"use client";
+
+import { signOut, useSession } from "@/lib/auth-client";
 import Link from "next/link";
 import { BiTerminal } from "react-icons/bi";
 
-const Navigation = async () => {
-  const session = await getServerSession();
+const Navigation = () => {
+  const { data: session } = useSession();
 
   // Top Navigation
   return (
@@ -22,12 +24,42 @@ const Navigation = async () => {
 
         {session?.user ? (
           <div className="flex space-x-10">
-            <Link href={"/explainer"}> Explainer</Link>
-            <Link href={"/history"}> History</Link>
-            <Link href={"/settings"}> Settings</Link>
+            <Link
+              className="p-2 text-white rounded-md text-sm tracking-tight"
+              href={"/explainer"}
+            >
+              {" "}
+              Explainer
+            </Link>
+            <Link
+              className="p-2 text-white rounded-md text-sm tracking-tight"
+              href={"/history"}
+            >
+              {" "}
+              History
+            </Link>
+            <Link
+              className="p-2 text-white rounded-md text-sm tracking-tight"
+              href={"/settings"}
+            >
+              {" "}
+              Settings
+            </Link>
+            <Link
+              href={""}
+              onClick={() => signOut()}
+              className="p-2 bg-blue-600/30 text-white rounded-md text-sm tracking-tight"
+            >
+              Sign Out
+            </Link>
           </div>
         ) : (
-          <Link href={"/auth/signIn"}> Sign In</Link>
+          <Link
+            href={"/login"}
+            className="p-2 bg-blue-600/30 text-white rounded-md text-sm tracking-tight"
+          >
+            Sign In
+          </Link>
         )}
       </div>
     </header>
