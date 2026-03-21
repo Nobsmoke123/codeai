@@ -50,7 +50,7 @@ const Loading = () => {
           </label>
         </div>
 
-        <div className="flex flex-col items-center justify-center glass-overlay px-6 mt-10">
+        <div className="absolute top-30 flex flex-col items-center justify-center glass-overlay px-6 mt-10">
           <div className="relative flex items-center justify-center mb-8">
             <div className="absolute size-32 rounded-full border-4 border-custom-primary/20 animate-pulse"></div>
             <div className="size-24 rounded-full border-4 border-t-custom-primary border-r-transparent border-b-custom-primary border-l-transparent animate-spin"></div>
@@ -78,8 +78,8 @@ const Loading = () => {
           </div>
           <div className="mt-12 w-full max-w-sm bg-white/5 dark:bg-white/5 border border-white/10 rounded-2xl p-4 backdrop-blur-md">
             <div className="flex gap-3">
-              <div className="size-10 rounded-lg bg-custom-primary/10 flex items-center justify-center shrink-0">
-                <BiSolidBulb className="text-custom-primary text-xl" />
+              <div className="size-10 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
+                <BiSolidBulb className="text-primary text-xl" />
               </div>
               <div>
                 <h4 className="text-sm font-semibold text-slate-900 dark:text-white">
@@ -91,11 +91,6 @@ const Loading = () => {
                 </p>
               </div>
             </div>
-          </div>
-          <div className="w-full flex justify-center px-4 mt-6">
-            <button className="flex min-w-[120px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-12 px-6 bg-slate-200/50 dark:bg-slate-800/50 text-slate-600 dark:text-slate-300 text-sm font-semibold transition-colors hover:bg-slate-200 dark:hover:bg-slate-700">
-              <span className="truncate">Cancel Request</span>
-            </button>
           </div>
         </div>
         <div className="h-8 w-full flex justify-center items-end pb-2">

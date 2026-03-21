@@ -5,11 +5,11 @@ import Link from "next/link";
 import { BiTerminal } from "react-icons/bi";
 
 const Navigation = () => {
-  const { data: session } = useSession();
+  const { data: session, isPending } = useSession();
 
   // Top Navigation
   return (
-    <header className="sticky w-full max-w-5xl mx-auto top-0 z-50 bg-background-light/80 dark:bg-background-dark/80 ios-blur border-b border-slate-200 dark:border-slate-800">
+    <header className="w-full max-w-5xl mx-auto top-0 z-50 bg-background-light/80 dark:bg-background-dark/80 ios-blur border-b border-slate-200 dark:border-slate-800">
       <div className="flex items-center justify-between px-4 h-14">
         <div className="flex items-center gap-2">
           <Link href={"/"}>
@@ -22,7 +22,7 @@ const Navigation = () => {
           </Link>
         </div>
 
-        {session?.user ? (
+        {!isPending && session?.user ? (
           <div className="flex space-x-10">
             <Link
               className="p-2 text-white rounded-md text-sm tracking-tight"
