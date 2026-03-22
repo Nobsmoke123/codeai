@@ -1057,6 +1057,7 @@ export const ExplanationScalarFieldEnum = {
   prompt_tokens: 'prompt_tokens',
   completion_tokens: 'completion_tokens',
   total_tokens: 'total_tokens',
+  code_hash: 'code_hash',
   deleted_at: 'deleted_at',
   created_at: 'created_at',
   updated_at: 'updated_at'

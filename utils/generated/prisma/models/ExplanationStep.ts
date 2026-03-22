@@ -273,7 +273,6 @@ export type ExplanationStepOrderByWithRelationInput = {
 
 export type ExplanationStepWhereUniqueInput = Prisma.AtLeast<{
   id?: bigint | number
-  explanation_id_created_at?: Prisma.ExplanationStepExplanation_idCreated_atCompoundUniqueInput
   AND?: Prisma.ExplanationStepWhereInput | Prisma.ExplanationStepWhereInput[]
   OR?: Prisma.ExplanationStepWhereInput[]
   NOT?: Prisma.ExplanationStepWhereInput | Prisma.ExplanationStepWhereInput[]
@@ -285,7 +284,7 @@ export type ExplanationStepWhereUniqueInput = Prisma.AtLeast<{
   created_at?: Prisma.DateTimeFilter<"ExplanationStep"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"ExplanationStep"> | Date | string
   explanation?: Prisma.XOR<Prisma.ExplanationScalarRelationFilter, Prisma.ExplanationWhereInput>
-}, "id" | "explanation_id_created_at">
+}, "id">
 
 export type ExplanationStepOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
@@ -401,11 +400,6 @@ export type ExplanationStepListRelationFilter = {
 
 export type ExplanationStepOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
-}
-
-export type ExplanationStepExplanation_idCreated_atCompoundUniqueInput = {
-  explanation_id: bigint | number
-  created_at: Date | string
 }
 
 export type ExplanationStepCountOrderByAggregateInput = {

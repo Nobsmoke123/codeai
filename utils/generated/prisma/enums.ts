@@ -19,9 +19,12 @@ export type ExplanationComplexity = (typeof ExplanationComplexity)[keyof typeof 
 
 
 export const ExplanationStatus = {
-  PENDING: 'PENDING',
+  CANCELLED: 'CANCELLED',
   COMPLETED: 'COMPLETED',
-  FAILED: 'FAILED'
+  FAILED: 'FAILED',
+  INPROGRESS: 'INPROGRESS',
+  INCOMPLETE: 'INCOMPLETE',
+  QUEUED: 'QUEUED'
 } as const
 
 export type ExplanationStatus = (typeof ExplanationStatus)[keyof typeof ExplanationStatus]

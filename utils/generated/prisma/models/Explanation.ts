@@ -57,6 +57,7 @@ export type ExplanationMinAggregateOutputType = {
   prompt_tokens: number | null
   completion_tokens: number | null
   total_tokens: number | null
+  code_hash: string | null
   deleted_at: Date | null
   created_at: Date | null
   updated_at: Date | null
@@ -79,6 +80,7 @@ export type ExplanationMaxAggregateOutputType = {
   prompt_tokens: number | null
   completion_tokens: number | null
   total_tokens: number | null
+  code_hash: string | null
   deleted_at: Date | null
   created_at: Date | null
   updated_at: Date | null
@@ -102,6 +104,7 @@ export type ExplanationCountAggregateOutputType = {
   prompt_tokens: number
   completion_tokens: number
   total_tokens: number
+  code_hash: number
   deleted_at: number
   created_at: number
   updated_at: number
@@ -140,6 +143,7 @@ export type ExplanationMinAggregateInputType = {
   prompt_tokens?: true
   completion_tokens?: true
   total_tokens?: true
+  code_hash?: true
   deleted_at?: true
   created_at?: true
   updated_at?: true
@@ -162,6 +166,7 @@ export type ExplanationMaxAggregateInputType = {
   prompt_tokens?: true
   completion_tokens?: true
   total_tokens?: true
+  code_hash?: true
   deleted_at?: true
   created_at?: true
   updated_at?: true
@@ -185,6 +190,7 @@ export type ExplanationCountAggregateInputType = {
   prompt_tokens?: true
   completion_tokens?: true
   total_tokens?: true
+  code_hash?: true
   deleted_at?: true
   created_at?: true
   updated_at?: true
@@ -295,6 +301,7 @@ export type ExplanationGroupByOutputType = {
   prompt_tokens: number | null
   completion_tokens: number | null
   total_tokens: number | null
+  code_hash: string
   deleted_at: Date | null
   created_at: Date
   updated_at: Date
@@ -341,6 +348,7 @@ export type ExplanationWhereInput = {
   prompt_tokens?: Prisma.IntNullableFilter<"Explanation"> | number | null
   completion_tokens?: Prisma.IntNullableFilter<"Explanation"> | number | null
   total_tokens?: Prisma.IntNullableFilter<"Explanation"> | number | null
+  code_hash?: Prisma.StringFilter<"Explanation"> | string
   deleted_at?: Prisma.DateTimeNullableFilter<"Explanation"> | Date | string | null
   created_at?: Prisma.DateTimeFilter<"Explanation"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"Explanation"> | Date | string
@@ -366,6 +374,7 @@ export type ExplanationOrderByWithRelationInput = {
   prompt_tokens?: Prisma.SortOrderInput | Prisma.SortOrder
   completion_tokens?: Prisma.SortOrderInput | Prisma.SortOrder
   total_tokens?: Prisma.SortOrderInput | Prisma.SortOrder
+  code_hash?: Prisma.SortOrder
   deleted_at?: Prisma.SortOrderInput | Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
@@ -375,6 +384,7 @@ export type ExplanationOrderByWithRelationInput = {
 
 export type ExplanationWhereUniqueInput = Prisma.AtLeast<{
   id?: bigint | number
+  user_id_code_hash?: Prisma.ExplanationUser_idCode_hashCompoundUniqueInput
   AND?: Prisma.ExplanationWhereInput | Prisma.ExplanationWhereInput[]
   OR?: Prisma.ExplanationWhereInput[]
   NOT?: Prisma.ExplanationWhereInput | Prisma.ExplanationWhereInput[]
@@ -394,12 +404,13 @@ export type ExplanationWhereUniqueInput = Prisma.AtLeast<{
   prompt_tokens?: Prisma.IntNullableFilter<"Explanation"> | number | null
   completion_tokens?: Prisma.IntNullableFilter<"Explanation"> | number | null
   total_tokens?: Prisma.IntNullableFilter<"Explanation"> | number | null
+  code_hash?: Prisma.StringFilter<"Explanation"> | string
   deleted_at?: Prisma.DateTimeNullableFilter<"Explanation"> | Date | string | null
   created_at?: Prisma.DateTimeFilter<"Explanation"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"Explanation"> | Date | string
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   explanation_steps?: Prisma.ExplanationStepListRelationFilter
-}, "id">
+}, "id" | "user_id_code_hash">
 
 export type ExplanationOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
@@ -419,6 +430,7 @@ export type ExplanationOrderByWithAggregationInput = {
   prompt_tokens?: Prisma.SortOrderInput | Prisma.SortOrder
   completion_tokens?: Prisma.SortOrderInput | Prisma.SortOrder
   total_tokens?: Prisma.SortOrderInput | Prisma.SortOrder
+  code_hash?: Prisma.SortOrder
   deleted_at?: Prisma.SortOrderInput | Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
@@ -450,6 +462,7 @@ export type ExplanationScalarWhereWithAggregatesInput = {
   prompt_tokens?: Prisma.IntNullableWithAggregatesFilter<"Explanation"> | number | null
   completion_tokens?: Prisma.IntNullableWithAggregatesFilter<"Explanation"> | number | null
   total_tokens?: Prisma.IntNullableWithAggregatesFilter<"Explanation"> | number | null
+  code_hash?: Prisma.StringWithAggregatesFilter<"Explanation"> | string
   deleted_at?: Prisma.DateTimeNullableWithAggregatesFilter<"Explanation"> | Date | string | null
   created_at?: Prisma.DateTimeWithAggregatesFilter<"Explanation"> | Date | string
   updated_at?: Prisma.DateTimeWithAggregatesFilter<"Explanation"> | Date | string
@@ -472,6 +485,7 @@ export type ExplanationCreateInput = {
   prompt_tokens?: number | null
   completion_tokens?: number | null
   total_tokens?: number | null
+  code_hash: string
   deleted_at?: Date | string | null
   created_at?: Date | string
   updated_at?: Date | string
@@ -497,6 +511,7 @@ export type ExplanationUncheckedCreateInput = {
   prompt_tokens?: number | null
   completion_tokens?: number | null
   total_tokens?: number | null
+  code_hash: string
   deleted_at?: Date | string | null
   created_at?: Date | string
   updated_at?: Date | string
@@ -520,6 +535,7 @@ export type ExplanationUpdateInput = {
   prompt_tokens?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   completion_tokens?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   total_tokens?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  code_hash?: Prisma.StringFieldUpdateOperationsInput | string
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -545,6 +561,7 @@ export type ExplanationUncheckedUpdateInput = {
   prompt_tokens?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   completion_tokens?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   total_tokens?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  code_hash?: Prisma.StringFieldUpdateOperationsInput | string
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -569,6 +586,7 @@ export type ExplanationCreateManyInput = {
   prompt_tokens?: number | null
   completion_tokens?: number | null
   total_tokens?: number | null
+  code_hash: string
   deleted_at?: Date | string | null
   created_at?: Date | string
   updated_at?: Date | string
@@ -591,6 +609,7 @@ export type ExplanationUpdateManyMutationInput = {
   prompt_tokens?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   completion_tokens?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   total_tokens?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  code_hash?: Prisma.StringFieldUpdateOperationsInput | string
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -614,6 +633,7 @@ export type ExplanationUncheckedUpdateManyInput = {
   prompt_tokens?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   completion_tokens?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   total_tokens?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  code_hash?: Prisma.StringFieldUpdateOperationsInput | string
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -627,6 +647,11 @@ export type ExplanationListRelationFilter = {
 
 export type ExplanationOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
+}
+
+export type ExplanationUser_idCode_hashCompoundUniqueInput = {
+  user_id: string
+  code_hash: string
 }
 
 export type ExplanationCountOrderByAggregateInput = {
@@ -647,6 +672,7 @@ export type ExplanationCountOrderByAggregateInput = {
   prompt_tokens?: Prisma.SortOrder
   completion_tokens?: Prisma.SortOrder
   total_tokens?: Prisma.SortOrder
+  code_hash?: Prisma.SortOrder
   deleted_at?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
@@ -676,6 +702,7 @@ export type ExplanationMaxOrderByAggregateInput = {
   prompt_tokens?: Prisma.SortOrder
   completion_tokens?: Prisma.SortOrder
   total_tokens?: Prisma.SortOrder
+  code_hash?: Prisma.SortOrder
   deleted_at?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
@@ -698,6 +725,7 @@ export type ExplanationMinOrderByAggregateInput = {
   prompt_tokens?: Prisma.SortOrder
   completion_tokens?: Prisma.SortOrder
   total_tokens?: Prisma.SortOrder
+  code_hash?: Prisma.SortOrder
   deleted_at?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
@@ -804,6 +832,7 @@ export type ExplanationCreateWithoutUserInput = {
   prompt_tokens?: number | null
   completion_tokens?: number | null
   total_tokens?: number | null
+  code_hash: string
   deleted_at?: Date | string | null
   created_at?: Date | string
   updated_at?: Date | string
@@ -827,6 +856,7 @@ export type ExplanationUncheckedCreateWithoutUserInput = {
   prompt_tokens?: number | null
   completion_tokens?: number | null
   total_tokens?: number | null
+  code_hash: string
   deleted_at?: Date | string | null
   created_at?: Date | string
   updated_at?: Date | string
@@ -880,6 +910,7 @@ export type ExplanationScalarWhereInput = {
   prompt_tokens?: Prisma.IntNullableFilter<"Explanation"> | number | null
   completion_tokens?: Prisma.IntNullableFilter<"Explanation"> | number | null
   total_tokens?: Prisma.IntNullableFilter<"Explanation"> | number | null
+  code_hash?: Prisma.StringFilter<"Explanation"> | string
   deleted_at?: Prisma.DateTimeNullableFilter<"Explanation"> | Date | string | null
   created_at?: Prisma.DateTimeFilter<"Explanation"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"Explanation"> | Date | string
@@ -902,6 +933,7 @@ export type ExplanationCreateWithoutExplanation_stepsInput = {
   prompt_tokens?: number | null
   completion_tokens?: number | null
   total_tokens?: number | null
+  code_hash: string
   deleted_at?: Date | string | null
   created_at?: Date | string
   updated_at?: Date | string
@@ -926,6 +958,7 @@ export type ExplanationUncheckedCreateWithoutExplanation_stepsInput = {
   prompt_tokens?: number | null
   completion_tokens?: number | null
   total_tokens?: number | null
+  code_hash: string
   deleted_at?: Date | string | null
   created_at?: Date | string
   updated_at?: Date | string
@@ -964,6 +997,7 @@ export type ExplanationUpdateWithoutExplanation_stepsInput = {
   prompt_tokens?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   completion_tokens?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   total_tokens?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  code_hash?: Prisma.StringFieldUpdateOperationsInput | string
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -988,6 +1022,7 @@ export type ExplanationUncheckedUpdateWithoutExplanation_stepsInput = {
   prompt_tokens?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   completion_tokens?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   total_tokens?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  code_hash?: Prisma.StringFieldUpdateOperationsInput | string
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1010,6 +1045,7 @@ export type ExplanationCreateManyUserInput = {
   prompt_tokens?: number | null
   completion_tokens?: number | null
   total_tokens?: number | null
+  code_hash: string
   deleted_at?: Date | string | null
   created_at?: Date | string
   updated_at?: Date | string
@@ -1032,6 +1068,7 @@ export type ExplanationUpdateWithoutUserInput = {
   prompt_tokens?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   completion_tokens?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   total_tokens?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  code_hash?: Prisma.StringFieldUpdateOperationsInput | string
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1055,6 +1092,7 @@ export type ExplanationUncheckedUpdateWithoutUserInput = {
   prompt_tokens?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   completion_tokens?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   total_tokens?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  code_hash?: Prisma.StringFieldUpdateOperationsInput | string
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1078,6 +1116,7 @@ export type ExplanationUncheckedUpdateManyWithoutUserInput = {
   prompt_tokens?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   completion_tokens?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   total_tokens?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  code_hash?: Prisma.StringFieldUpdateOperationsInput | string
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1132,6 +1171,7 @@ export type ExplanationSelect<ExtArgs extends runtime.Types.Extensions.InternalA
   prompt_tokens?: boolean
   completion_tokens?: boolean
   total_tokens?: boolean
+  code_hash?: boolean
   deleted_at?: boolean
   created_at?: boolean
   updated_at?: boolean
@@ -1158,6 +1198,7 @@ export type ExplanationSelectCreateManyAndReturn<ExtArgs extends runtime.Types.E
   prompt_tokens?: boolean
   completion_tokens?: boolean
   total_tokens?: boolean
+  code_hash?: boolean
   deleted_at?: boolean
   created_at?: boolean
   updated_at?: boolean
@@ -1182,6 +1223,7 @@ export type ExplanationSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.E
   prompt_tokens?: boolean
   completion_tokens?: boolean
   total_tokens?: boolean
+  code_hash?: boolean
   deleted_at?: boolean
   created_at?: boolean
   updated_at?: boolean
@@ -1206,12 +1248,13 @@ export type ExplanationSelectScalar = {
   prompt_tokens?: boolean
   completion_tokens?: boolean
   total_tokens?: boolean
+  code_hash?: boolean
   deleted_at?: boolean
   created_at?: boolean
   updated_at?: boolean
 }
 
-export type ExplanationOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "user_id" | "title" | "code" | "language" | "summary" | "longSummary" | "complexity" | "optimization_tip" | "performance_impact" | "model" | "raw_response_json" | "status" | "error_message" | "prompt_tokens" | "completion_tokens" | "total_tokens" | "deleted_at" | "created_at" | "updated_at", ExtArgs["result"]["explanation"]>
+export type ExplanationOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "user_id" | "title" | "code" | "language" | "summary" | "longSummary" | "complexity" | "optimization_tip" | "performance_impact" | "model" | "raw_response_json" | "status" | "error_message" | "prompt_tokens" | "completion_tokens" | "total_tokens" | "code_hash" | "deleted_at" | "created_at" | "updated_at", ExtArgs["result"]["explanation"]>
 export type ExplanationInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   explanation_steps?: boolean | Prisma.Explanation$explanation_stepsArgs<ExtArgs>
@@ -1248,6 +1291,7 @@ export type $ExplanationPayload<ExtArgs extends runtime.Types.Extensions.Interna
     prompt_tokens: number | null
     completion_tokens: number | null
     total_tokens: number | null
+    code_hash: string
     deleted_at: Date | null
     created_at: Date
     updated_at: Date
@@ -1693,6 +1737,7 @@ export interface ExplanationFieldRefs {
   readonly prompt_tokens: Prisma.FieldRef<"Explanation", 'Int'>
   readonly completion_tokens: Prisma.FieldRef<"Explanation", 'Int'>
   readonly total_tokens: Prisma.FieldRef<"Explanation", 'Int'>
+  readonly code_hash: Prisma.FieldRef<"Explanation", 'String'>
   readonly deleted_at: Prisma.FieldRef<"Explanation", 'DateTime'>
   readonly created_at: Prisma.FieldRef<"Explanation", 'DateTime'>
   readonly updated_at: Prisma.FieldRef<"Explanation", 'DateTime'>

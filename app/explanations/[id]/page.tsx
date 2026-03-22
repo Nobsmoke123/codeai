@@ -11,7 +11,13 @@ import {
   BsStars,
 } from "react-icons/bs";
 
-const ExplanationPage = async () => {
+const ExplanationPage = async ({
+  params,
+}: {
+  params: Promise<{ id: bigint }>;
+}) => {
+  const { id: explanation_id } = await params;
+
   const session = await getServerSession();
 
   if (!session?.user) {
@@ -27,10 +33,6 @@ const ExplanationPage = async () => {
             <span className="text-xs font-semibold uppercase tracking-wider text-white dark:text-slate-400">
               Original Snippet
             </span>
-            <button className="flex items-center gap-1 text-primary text-sm font-semibold">
-              <BsFillPenFill className="text-xs" />
-              Edit
-            </button>
           </div>
           <div className="bg-slate-50 dark:bg-slate-950 rounded-lg p-3 overflow-hidden">
             <code className="code-font text-sm text-slate-700 dark:text-slate-300 block truncate">
