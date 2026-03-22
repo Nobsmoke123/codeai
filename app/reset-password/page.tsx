@@ -1,5 +1,7 @@
 import AuthenticationNav from "@/components/ui/AuthenticationNav";
+import { useSession } from "@/lib/auth-client";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { BiTerminal } from "react-icons/bi";
 import {
   BsArrowRight,
@@ -9,6 +11,12 @@ import {
 } from "react-icons/bs";
 
 const ResetPasswordPage = () => {
+  const { data: session, isPending, error, refetch } = useSession();
+  const router = useRouter();
+
+  if (session?.user) {
+    router.replace("/");
+  }
   return (
     <div>
       <AuthenticationNav />

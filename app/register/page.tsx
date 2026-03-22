@@ -1,9 +1,17 @@
 import AuthenticationNav from "@/components/ui/AuthenticationNav";
-import { signIn } from "@/lib/auth-client";
+import { signIn, useSession } from "@/lib/auth-client";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { BiLogoGithub, BiLogoGoogle } from "react-icons/bi";
 
 const RegisterPage = () => {
+  const { data: session, isPending, error, refetch } = useSession();
+  const router = useRouter();
+
+  if (session?.user) {
+    router.replace("/");
+  }
+  
   return (
     <div>
       <AuthenticationNav />

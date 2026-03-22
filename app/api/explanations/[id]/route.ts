@@ -1,6 +1,7 @@
 import { getServerSession } from "@/lib/session";
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/auth";
+import { serializeJson } from "@/utils/helpers";
 
 export async function GET(
   _req: Request,
@@ -19,6 +20,17 @@ export async function GET(
       user_id: session.user.id,
       id: BigInt(explanation_id),
     },
+    include: {
+      explanation_steps: {
+        select: {
+          id: true,
+          line_start: true,
+          line_end: true,
+          step_number: true,
+          text: true,
+        },
+      },
+    },
   });
 
   if (!existingCode) {
@@ -28,5 +40,5 @@ export async function GET(
     });
   }
 
-  return NextResponse.json(existingCode);
+  return NextResponse.json(serializeJson(existingCode));
 }

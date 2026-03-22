@@ -23,7 +23,7 @@ export default function Home() {
             <span className="font-bold text-lg tracking-tight">CodeAI</span>
           </div>
 
-          <div className="flex items-center">
+          <div className="flex items-center gap-4">
             {session?.user ? (
               <>
                 <Link

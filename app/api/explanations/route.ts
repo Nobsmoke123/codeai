@@ -8,7 +8,7 @@ import {
   ExplanationComplexity,
   ExplanationStatus,
 } from "@/utils/generated/prisma/enums";
-import { createCodeHash, logResponse } from "@/utils/helpers";
+import { createCodeHash, logResponse, serializeJson } from "@/utils/helpers";
 
 
 export async function POST(req: NextRequest) {
@@ -160,4 +160,20 @@ Rules:
       status: 400,
     });
   }
+}
+
+export async function GET(_req: Request) {
+  const session = await getServerSession();
+
+  if (!session?.user) {
+    return NextResponse.json({ error: "Unauthorized", status: 401 });
+  }
+
+  const explanations = await prisma.explanation.findMany({
+    where: {
+      user_id: session.user.id,
+    },
+  });
+
+  return NextResponse.json(serializeJson(explanations));
 }

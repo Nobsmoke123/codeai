@@ -6,7 +6,7 @@ import { BsStars } from "react-icons/bs";
 import { toast } from "react-toastify";
 import LoadingIndicator from "./Loading";
 import { useRouter } from "next/navigation";
-import { ErrorResult, SuccessResult } from "@/app/explainer/types";
+import { ErrorResult, SuccessResult } from "@/lib/types";
 
 const ExplainerClient = () => {
   const [code, setCode] = useState<string>("");
