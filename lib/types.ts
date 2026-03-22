@@ -19,6 +19,7 @@ export type ExplanationStep = {
 };
 
 export type Explanation = {
+  id: bigint;
   title: string;
   language: string;
   code: string;

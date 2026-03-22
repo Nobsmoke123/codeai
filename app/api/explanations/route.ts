@@ -172,6 +172,7 @@ export async function GET(_req: Request) {
   const explanations = await prisma.explanation.findMany({
     where: {
       user_id: session.user.id,
+      deleted_at: null,
     },
   });
 
