@@ -1,3 +1,5 @@
+"use client";
+
 import { signIn } from "@/lib/auth-client";
 import Link from "next/link";
 import { BiLogoGithub, BiLogoGoogle } from "react-icons/bi";

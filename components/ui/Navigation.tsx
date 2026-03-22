@@ -2,10 +2,12 @@
 
 import { signOut, useSession } from "@/lib/auth-client";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { BiTerminal } from "react-icons/bi";
 
 const Navigation = () => {
   const { data: session, isPending } = useSession();
+  const router = useRouter();
 
   // Top Navigation
   return (
@@ -45,13 +47,16 @@ const Navigation = () => {
               {" "}
               Settings
             </Link>
-            <Link
-              href={""}
-              onClick={() => signOut()}
+            <button
+              type="button"
+              onClick={async () => {
+                await signOut();
+                router.push("/");
+              }}
               className="p-2 bg-blue-600/30 text-white rounded-md text-sm tracking-tight"
             >
               Sign Out
-            </Link>
+            </button>
           </div>
         ) : (
           <Link

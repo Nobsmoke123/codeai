@@ -9,7 +9,7 @@ import { BsCodeSlash, BsTencentQq, BsTerminal, BsUbuntu } from "react-icons/bs";
 import { MdHub } from "react-icons/md";
 
 export default function Home() {
-  const { data: session, isPending, error, refetch } = useSession();
+  const { data: session } = useSession();
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-background-dark font-sans dark:bg-black">
@@ -47,13 +47,15 @@ export default function Home() {
                   Settings
                 </Link>
 
-                <Link
-                  href={""}
-                  onClick={() => signOut()}
+                <button
+                  type="button"
+                  onClick={async () => {
+                    await signOut();
+                  }}
                   className="p-2 bg-blue-600/30 text-white rounded-md text-sm tracking-tight"
                 >
                   Sign Out
-                </Link>
+                </button>
               </>
             ) : (
               <Link
