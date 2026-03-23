@@ -9,6 +9,7 @@ import { Explanation } from "@/lib/types";
 import SyntaxHighlighter from "react-syntax-highlighter";
 import { vscDarkPlus } from "react-syntax-highlighter/dist/esm/styles/prism";
 import Link from "next/link";
+import { BsBook } from "react-icons/bs";
 
 const HistoryPage = async () => {
   const session = await getServerSession();
@@ -38,7 +39,7 @@ const HistoryPage = async () => {
         <Navigation />
 
         <main className="flex flex-col p-4 gap-4">
-          {explanations.length &&
+          {explanations.length > 0 &&
             explanations.map((explanation) => (
               <Link
                 href={`/explanations/${explanation.id}`}
@@ -83,6 +84,13 @@ const HistoryPage = async () => {
                 </div>
               </Link>
             ))}
+
+          {explanations.length === 0 && (
+            <div className="h-10 bg-slate-900 rounded rounded-md flex items-center justify-center gap-4 p-8">
+              <BsBook className="text-3xl font-medium" />
+              <p className="text-sm font-light">No Histories yet</p>
+            </div>
+          )}
         </main>
       </div>
     </div>

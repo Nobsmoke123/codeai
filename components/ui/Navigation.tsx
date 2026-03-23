@@ -4,6 +4,7 @@ import { signOut, useSession } from "@/lib/auth-client";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { BiTerminal } from "react-icons/bi";
+import { toast } from "react-toastify";
 
 const Navigation = () => {
   const { data: session, isPending } = useSession();
@@ -51,7 +52,8 @@ const Navigation = () => {
               type="button"
               onClick={async () => {
                 await signOut();
-                router.push("/");
+                toast.success("Log out successfully.");
+                router.replace("/");
               }}
               className="p-2 bg-blue-600/30 text-white rounded-md text-sm tracking-tight"
             >

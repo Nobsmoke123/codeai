@@ -13,10 +13,9 @@ export const auth = betterAuth({
   baseURL: process.env.BETTER_AUTH_URL,
   emailAndPassword: {
     enabled: true,
-    autoSignIn: false,
   },
   emailVerification: {
-    autoSignInAfterVerification: true,
+    autoSignInAfterVerification: false,
   },
   socialProviders: {
     github: {

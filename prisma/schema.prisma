@@ -84,7 +84,7 @@ model Profile {
   user_id       String   @unique
   email         String   @unique
   full_name     String
-  avatar_url    String
+  avatar_url    String?
   last_login_at DateTime
   created_at    DateTime @default(now())
   updated_at    DateTime @updatedAt

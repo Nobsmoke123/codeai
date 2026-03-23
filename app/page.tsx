@@ -4,12 +4,15 @@ import Features from "@/components/layouts/Features";
 import Hero from "@/components/layouts/Hero";
 import { signOut, useSession } from "@/lib/auth-client";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { BiTerminal } from "react-icons/bi";
 import { BsCodeSlash, BsTencentQq, BsTerminal, BsUbuntu } from "react-icons/bs";
 import { MdHub } from "react-icons/md";
+import { toast } from "react-toastify";
 
 export default function Home() {
   const { data: session } = useSession();
+  const router = useRouter();
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-background-dark font-sans dark:bg-black">
@@ -51,6 +54,8 @@ export default function Home() {
                   type="button"
                   onClick={async () => {
                     await signOut();
+                    toast.success("Log out successfully.");
+                    router.replace("/");
                   }}
                   className="p-2 bg-blue-600/30 text-white rounded-md text-sm tracking-tight"
                 >

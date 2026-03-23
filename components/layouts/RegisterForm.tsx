@@ -1,10 +1,64 @@
 "use client";
 
-import { signIn } from "@/lib/auth-client";
+import { signIn, signUp } from "@/lib/auth-client";
 import Link from "next/link";
+import { ChangeEvent, useState } from "react";
 import { BiLogoGithub, BiLogoGoogle } from "react-icons/bi";
+import { toast } from "react-toastify";
+import { BeatLoader } from "react-spinners";
+import { useRouter } from "next/navigation";
+
+type RegisterFormData = {
+  fullname: string;
+  email: string;
+  password: string;
+};
 
 const RegisterForm = () => {
+  const [formData, setFormData] = useState<RegisterFormData>({
+    email: "",
+    fullname: "",
+    password: "",
+  });
+
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  const router = useRouter();
+
+  const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = async () => {
+    try {
+      setIsLoading(true);
+      const result = await signUp.email(
+        {
+          ...formData,
+          name: formData.fullname,
+          callbackURL: "/explainer",
+        },
+        {
+          onSuccess: () => {
+            router.push("/explainer");
+          },
+        },
+      );
+      setIsLoading(false);
+      if (result.data?.user) {
+        toast.success("Account created successfully.");
+      } else {
+        toast.error("An error occurred please contact support.");
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error("Invalid email or password.");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
     <div className="glass-panel border border-white/5 rounded-xl p-8 shadow-2xl">
       <div className="mb-8">
@@ -25,6 +79,9 @@ const RegisterForm = () => {
               className="w-full bg-[#191b24] border-none ring-1 ring-outline-variant focus:ring-2 focus:ring-primary rounded-lg py-3 px-4 text-[#ffffff] placeholder:text-slate-600 transition-all outline-none"
               placeholder="John Doe"
               type="text"
+              onChange={handleInputChange}
+              value={formData.fullname}
+              name="fullname"
             />
           </div>
         </div>
@@ -38,6 +95,9 @@ const RegisterForm = () => {
               className="w-full bg-[#191b24] border-none ring-1 ring-outline-variant focus:ring-2 focus:ring-primary rounded-lg py-3 px-4 text-[#ffffff] placeholder:text-slate-600 transition-all outline-none"
               placeholder="name@company.com"
               type="email"
+              onChange={handleInputChange}
+              value={formData.email}
+              name="email"
             />
           </div>
         </div>
@@ -52,14 +112,19 @@ const RegisterForm = () => {
               className="w-full bg-[#191b24] border-none ring-1 ring-outline-variant focus:ring-2 focus:ring-primary rounded-lg py-3 px-4 text-[#ffffff] placeholder:text-slate-600 transition-all outline-none"
               placeholder="••••••••"
               type="password"
+              onChange={handleInputChange}
+              value={formData.password}
+              name="password"
             />
           </div>
         </div>
         <button
           className="w-full bg-blue-500 text-white font-black py-4 rounded-lg shadow-[0_0_40px_-10px_rgba(19,91,236,0.3)] hover:opacity-90 active:scale-[0.98] transition-all tracking-widest uppercase text-sm"
-          type="submit"
+          type="button"
+          disabled={!isLoading ? false : true}
+          onClick={handleSubmit}
         >
-          Register
+          {!isLoading ? "Register" : <BeatLoader />}
         </button>
       </form>
 

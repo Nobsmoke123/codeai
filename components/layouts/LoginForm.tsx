@@ -2,9 +2,52 @@
 
 import { signIn } from "@/lib/auth-client";
 import Link from "next/link";
+import { ChangeEvent, useState } from "react";
 import { BiLogoGithub, BiLogoGoogle } from "react-icons/bi";
+import { toast } from "react-toastify";
+import { BeatLoader } from "react-spinners";
+
+type LoginFormData = {
+  email: string;
+  password: string;
+};
 
 const LoginForm = () => {
+
+  const [formData, setFormData] = useState<LoginFormData>({
+    email: "",
+    password: "",
+  });
+
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmitButton = async () => {
+    try {
+      setIsLoading(true);
+      const result = await signIn.email({
+        ...formData,
+        callbackURL: "/explainer",
+      });
+
+      if (result.error) {
+        toast.error(result.error.message);
+        return;
+      }
+
+      toast.success("Login successful.");
+    } catch (error) {
+      toast.error("Invalid email or password.");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+
   return (
     <div className="w-full max-w-md max-w-[420px] relative z-10">
       <div className="glass-panel border border-white/5 rounded-xl p-8 shadow-2xl">
@@ -26,6 +69,9 @@ const LoginForm = () => {
                 className="w-full bg-[#191b24] border-none ring-1 ring-outline-variant focus:ring-2 focus:ring-primary rounded-lg py-3 px-4 text-[#ffffff] placeholder:text-slate-600 transition-all outline-none"
                 placeholder="name@company.com"
                 type="email"
+                name="email"
+                onChange={handleInputChange}
+                value={formData.email}
               />
             </div>
           </div>
@@ -46,14 +92,19 @@ const LoginForm = () => {
                 className="w-full bg-[#191b24] border-none ring-1 ring-outline-variant focus:ring-2 focus:ring-primary rounded-lg py-3 px-4 text-[#ffffff] placeholder:text-slate-600 transition-all outline-none"
                 placeholder="••••••••"
                 type="password"
+                name="password"
+                onChange={handleInputChange}
+                value={formData.password}
               />
             </div>
           </div>
           <button
             className="w-full bg-blue-500 text-white font-black py-4 rounded-lg shadow-[0_0_40px_-10px_rgba(19,91,236,0.3)] hover:opacity-90 active:scale-[0.98] transition-all tracking-widest uppercase text-sm"
-            type="submit"
+            type="button"
+            disabled={!isLoading ? false : true}
+            onClick={handleSubmitButton}
           >
-            Login
+            {!isLoading ? "Login" : <BeatLoader />}
           </button>
         </form>
 
@@ -71,8 +122,8 @@ const LoginForm = () => {
         <div className="grid grid-cols-2 gap-4">
           {/* Google button */}
           <button
-            onClick={() =>
-              signIn.social({
+            onClick={async () =>
+              await signIn.social({
                 provider: "google",
                 callbackURL: "/explainer",
               })
@@ -87,8 +138,8 @@ const LoginForm = () => {
 
           {/* Github button */}
           <button
-            onClick={() =>
-              signIn.social({
+            onClick={async () =>
+              await signIn.social({
                 provider: "github",
                 callbackURL: "/explainer",
               })

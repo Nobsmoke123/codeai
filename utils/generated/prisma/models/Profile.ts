@@ -202,7 +202,7 @@ export type ProfileGroupByOutputType = {
   user_id: string
   email: string
   full_name: string
-  avatar_url: string
+  avatar_url: string | null
   last_login_at: Date
   created_at: Date
   updated_at: Date
@@ -236,7 +236,7 @@ export type ProfileWhereInput = {
   user_id?: Prisma.StringFilter<"Profile"> | string
   email?: Prisma.StringFilter<"Profile"> | string
   full_name?: Prisma.StringFilter<"Profile"> | string
-  avatar_url?: Prisma.StringFilter<"Profile"> | string
+  avatar_url?: Prisma.StringNullableFilter<"Profile"> | string | null
   last_login_at?: Prisma.DateTimeFilter<"Profile"> | Date | string
   created_at?: Prisma.DateTimeFilter<"Profile"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"Profile"> | Date | string
@@ -248,7 +248,7 @@ export type ProfileOrderByWithRelationInput = {
   user_id?: Prisma.SortOrder
   email?: Prisma.SortOrder
   full_name?: Prisma.SortOrder
-  avatar_url?: Prisma.SortOrder
+  avatar_url?: Prisma.SortOrderInput | Prisma.SortOrder
   last_login_at?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
@@ -263,7 +263,7 @@ export type ProfileWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.ProfileWhereInput[]
   NOT?: Prisma.ProfileWhereInput | Prisma.ProfileWhereInput[]
   full_name?: Prisma.StringFilter<"Profile"> | string
-  avatar_url?: Prisma.StringFilter<"Profile"> | string
+  avatar_url?: Prisma.StringNullableFilter<"Profile"> | string | null
   last_login_at?: Prisma.DateTimeFilter<"Profile"> | Date | string
   created_at?: Prisma.DateTimeFilter<"Profile"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"Profile"> | Date | string
@@ -275,7 +275,7 @@ export type ProfileOrderByWithAggregationInput = {
   user_id?: Prisma.SortOrder
   email?: Prisma.SortOrder
   full_name?: Prisma.SortOrder
-  avatar_url?: Prisma.SortOrder
+  avatar_url?: Prisma.SortOrderInput | Prisma.SortOrder
   last_login_at?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
@@ -294,7 +294,7 @@ export type ProfileScalarWhereWithAggregatesInput = {
   user_id?: Prisma.StringWithAggregatesFilter<"Profile"> | string
   email?: Prisma.StringWithAggregatesFilter<"Profile"> | string
   full_name?: Prisma.StringWithAggregatesFilter<"Profile"> | string
-  avatar_url?: Prisma.StringWithAggregatesFilter<"Profile"> | string
+  avatar_url?: Prisma.StringNullableWithAggregatesFilter<"Profile"> | string | null
   last_login_at?: Prisma.DateTimeWithAggregatesFilter<"Profile"> | Date | string
   created_at?: Prisma.DateTimeWithAggregatesFilter<"Profile"> | Date | string
   updated_at?: Prisma.DateTimeWithAggregatesFilter<"Profile"> | Date | string
@@ -304,7 +304,7 @@ export type ProfileCreateInput = {
   id?: bigint | number
   email: string
   full_name: string
-  avatar_url: string
+  avatar_url?: string | null
   last_login_at: Date | string
   created_at?: Date | string
   updated_at?: Date | string
@@ -316,7 +316,7 @@ export type ProfileUncheckedCreateInput = {
   user_id: string
   email: string
   full_name: string
-  avatar_url: string
+  avatar_url?: string | null
   last_login_at: Date | string
   created_at?: Date | string
   updated_at?: Date | string
@@ -326,7 +326,7 @@ export type ProfileUpdateInput = {
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   email?: Prisma.StringFieldUpdateOperationsInput | string
   full_name?: Prisma.StringFieldUpdateOperationsInput | string
-  avatar_url?: Prisma.StringFieldUpdateOperationsInput | string
+  avatar_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   last_login_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -338,7 +338,7 @@ export type ProfileUncheckedUpdateInput = {
   user_id?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   full_name?: Prisma.StringFieldUpdateOperationsInput | string
-  avatar_url?: Prisma.StringFieldUpdateOperationsInput | string
+  avatar_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   last_login_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -349,7 +349,7 @@ export type ProfileCreateManyInput = {
   user_id: string
   email: string
   full_name: string
-  avatar_url: string
+  avatar_url?: string | null
   last_login_at: Date | string
   created_at?: Date | string
   updated_at?: Date | string
@@ -359,7 +359,7 @@ export type ProfileUpdateManyMutationInput = {
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   email?: Prisma.StringFieldUpdateOperationsInput | string
   full_name?: Prisma.StringFieldUpdateOperationsInput | string
-  avatar_url?: Prisma.StringFieldUpdateOperationsInput | string
+  avatar_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   last_login_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -370,7 +370,7 @@ export type ProfileUncheckedUpdateManyInput = {
   user_id?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   full_name?: Prisma.StringFieldUpdateOperationsInput | string
-  avatar_url?: Prisma.StringFieldUpdateOperationsInput | string
+  avatar_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   last_login_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -466,7 +466,7 @@ export type ProfileCreateWithoutUserInput = {
   id?: bigint | number
   email: string
   full_name: string
-  avatar_url: string
+  avatar_url?: string | null
   last_login_at: Date | string
   created_at?: Date | string
   updated_at?: Date | string
@@ -476,7 +476,7 @@ export type ProfileUncheckedCreateWithoutUserInput = {
   id?: bigint | number
   email: string
   full_name: string
-  avatar_url: string
+  avatar_url?: string | null
   last_login_at: Date | string
   created_at?: Date | string
   updated_at?: Date | string
@@ -502,7 +502,7 @@ export type ProfileUpdateWithoutUserInput = {
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   email?: Prisma.StringFieldUpdateOperationsInput | string
   full_name?: Prisma.StringFieldUpdateOperationsInput | string
-  avatar_url?: Prisma.StringFieldUpdateOperationsInput | string
+  avatar_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   last_login_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -512,7 +512,7 @@ export type ProfileUncheckedUpdateWithoutUserInput = {
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   email?: Prisma.StringFieldUpdateOperationsInput | string
   full_name?: Prisma.StringFieldUpdateOperationsInput | string
-  avatar_url?: Prisma.StringFieldUpdateOperationsInput | string
+  avatar_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   last_login_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -588,7 +588,7 @@ export type $ProfilePayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     user_id: string
     email: string
     full_name: string
-    avatar_url: string
+    avatar_url: string | null
     last_login_at: Date
     created_at: Date
     updated_at: Date

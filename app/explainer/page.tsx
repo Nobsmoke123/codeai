@@ -21,11 +21,14 @@ const EditorPage = async () => {
         last_login_at: new Date(),
       },
       create: {
-        user_id: session.user.id,
+        // user_id: session.user.id,
         email: session.user.email,
         avatar_url: session.user.image!,
         full_name: session.user.name,
         last_login_at: new Date(),
+        user: {
+          connect: { id: session.user.id },
+        },
       },
     });
   }
