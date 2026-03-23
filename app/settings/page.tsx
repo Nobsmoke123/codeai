@@ -1,9 +1,11 @@
 import Navigation from "@/components/ui/Navigation";
 import ThemeSelector from "@/components/ui/ThemeSelector";
 import { getServerSession } from "@/lib/session";
+import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { BiSolidFile } from "react-icons/bi";
 import { BsGlobe } from "react-icons/bs";
+import { formatDistanceToNow } from "date-fns";
 import {
   MdChevronRight,
   MdOutlineHelp,
@@ -11,6 +13,7 @@ import {
   MdOutlinePalette,
   MdOutlineSecurity,
 } from "react-icons/md";
+import { Profile } from "@/utils/generated/prisma/client";
 
 const SettingsPage = async () => {
   const session = await getServerSession();
@@ -21,6 +24,18 @@ const SettingsPage = async () => {
 
   const user = session.user;
 
+  const cookieStore = await cookies();
+  const cookieHeader = cookieStore.toString();
+
+  const data = await fetch(`${process.env.NEXT_PUBLIC_APP_URL!}/api/me`, {
+    headers: {
+      cookie: cookieHeader,
+    },
+    cache: "no-store",
+  });
+
+  const profile = (await data.json()) as Profile;
+  
   return (
     <div className="w-full max-w-5xl pt-6 mx-auto bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen font-display">
       <Navigation />
@@ -38,7 +53,7 @@ const SettingsPage = async () => {
                 data-alt="Professional developer profile picture headshot"
                 style={{
                   backgroundImage: `url(
-                    "${user?.image ?? "https://lh3.googleusercontent.com/aida-public/AB6AXuAMTo-nKfQw5tyJRagIBGW5dTl4sm5qE376ulU0F53mluJ_eZQLVrY-bIMC06_d6WSTxKZAOsHUGus6BABxObFcVoVPNsE2wPWgvkXYjRop7coA0k0fgCbhfKZ6vuN5fZ3uf3u7DHbmLhwJUfUmgjL6r_DmlaHDcsWTMKybDEUgTss6opQiInn-_mPi2VivfN-HrQtFmun2wd_dSOlTIMkxtFwyy501B2RUvmuXyuGPNV4v199UBb3296VFgxSPI2zPxVPRv-z9U6E"}")`,
+                    "${user?.image! ?? "https://lh3.googleusercontent.com/aida-public/AB6AXuAMTo-nKfQw5tyJRagIBGW5dTl4sm5qE376ulU0F53mluJ_eZQLVrY-bIMC06_d6WSTxKZAOsHUGus6BABxObFcVoVPNsE2wPWgvkXYjRop7coA0k0fgCbhfKZ6vuN5fZ3uf3u7DHbmLhwJUfUmgjL6r_DmlaHDcsWTMKybDEUgTss6opQiInn-_mPi2VivfN-HrQtFmun2wd_dSOlTIMkxtFwyy501B2RUvmuXyuGPNV4v199UBb3296VFgxSPI2zPxVPRv-z9U6E"}")`,
                 }}
               ></div>
               <div className="absolute bottom-0 right-0 size-4 bg-green-500 border-2 border-white dark:border-slate-900 rounded-full"></div>
@@ -49,7 +64,10 @@ const SettingsPage = async () => {
                 {user.email}
               </p>
               <p className="text-xs text-slate-300 font-medium ">
-                Last Login:{" "} 
+                Last Login:{" "}
+                {formatDistanceToNow(new Date(profile.last_login_at), {
+                  addSuffix: true,
+                })}
               </p>
             </div>
           </div>

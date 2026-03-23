@@ -3,11 +3,14 @@
 import { signOut, useSession } from "@/lib/auth-client";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { BiTerminal } from "react-icons/bi";
+import { BeatLoader } from "react-spinners";
 import { toast } from "react-toastify";
 
 const Navigation = () => {
   const { data: session, isPending } = useSession();
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const router = useRouter();
 
   // Top Navigation
@@ -51,13 +54,20 @@ const Navigation = () => {
             <button
               type="button"
               onClick={async () => {
-                await signOut();
-                toast.success("Log out successfully.");
-                router.replace("/");
+                try {
+                  setIsLoading(true);
+                  await signOut();
+                  toast.success("Log out successfully.");
+                  router.replace("/");
+                } catch (error) {
+                  console.log(error);
+                } finally {
+                  setIsLoading(false);
+                }
               }}
               className="p-2 bg-blue-600/30 text-white rounded-md text-sm tracking-tight"
             >
-              Sign Out
+              {!isLoading ? "Sign Out" : <BeatLoader />}
             </button>
           </div>
         ) : (

@@ -10,6 +10,7 @@ import SyntaxHighlighter from "react-syntax-highlighter";
 import { vscDarkPlus } from "react-syntax-highlighter/dist/esm/styles/prism";
 import Link from "next/link";
 import { BsBook } from "react-icons/bs";
+import { formatDistanceToNow } from "date-fns";
 
 const HistoryPage = async () => {
   const session = await getServerSession();
@@ -59,7 +60,11 @@ const HistoryPage = async () => {
                         <p className="text-[11px] font-medium text-slate-500 uppercase tracking-wider mt-0.5">
                           {explanation.language.charAt(0).toUpperCase() +
                             explanation.language.slice(1).toLowerCase()}{" "}
-                          • 2h ago
+                          •{" "}
+                          {formatDistanceToNow(
+                            new Date(explanation.created_at),
+                            { addSuffix: true },
+                          )}
                         </p>
                       </div>
                     </div>
