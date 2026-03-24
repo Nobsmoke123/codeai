@@ -7,6 +7,8 @@ import { BiLogoGithub, BiLogoGoogle } from "react-icons/bi";
 import { BeatLoader } from "react-spinners";
 import { toast } from "react-toastify";
 import TogglePassword from "../ui/TogglePassword";
+import { useRouter } from "next/navigation";
+
 
 type RegisterFormData = {
   fullname: string;
@@ -31,6 +33,7 @@ const RegisterForm = () => {
   });
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [revealPassword, setRevealPassword] = useState<boolean>(false);
+  const router = useRouter();
 
   const handlePasswordToggle = () => {
     setRevealPassword(!revealPassword);
@@ -50,11 +53,18 @@ const RegisterForm = () => {
         return;
       }
 
-      const result = await signUp.email({
-        ...formData,
-        name: formData.fullname,
-        callbackURL: "/explainer",
-      });
+      const result = await signUp.email(
+        {
+          ...formData,
+          name: formData.fullname,
+          callbackURL: "/explainer",
+        },
+        {
+          onSuccess: () => {
+            router.replace("/explainer");
+          },
+        },
+      );
 
       if (result.data?.user) {
         toast.success("Account created successfully.");

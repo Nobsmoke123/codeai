@@ -20,41 +20,39 @@ export const auth = betterAuth({
   baseURL: process.env.BETTER_AUTH_URL,
   emailAndPassword: {
     enabled: true,
-    sendResetPassword: async ({ user, url }) => {
-      const html = generateResetPasswordEmail({
-        username: user.name.toString().split(" ")[0],
-        url,
-      });
+    // sendResetPassword: async ({ user, url }) => {
+    //   const html = generateResetPasswordEmail({
+    //     username: user.name.toString().split(" ")[0],
+    //     url,
+    //   });
 
-      const result = await resend.emails.send({
-        from: "CodeAI <noreply@yourdomain.com>",
-        to: user.email,
-        subject: "CodeAI - Reset password",
-        html,
-      });
+    //   const result = await resend.emails.send({
+    //     from: "CodeAI <noreply@yourdomain.com>",
+    //     to: user.email,
+    //     subject: "CodeAI - Reset password",
+    //     html,
+    //   });
 
-      console.log("The result is: ", result);
-    },
-    resetPasswordTokenExpiresIn: 3600,
-    revokeSessionsOnPasswordReset: true,
-    autoSignIn: false,
-    requireEmailVerification: true,
+    //   console.log("The result is: ", result);
+    // },
+    // resetPasswordTokenExpiresIn: 3600,
+    // revokeSessionsOnPasswordReset: true,
+    autoSignIn: true,
+    // requireEmailVerification: true,
   },
   emailVerification: {
-    sendVerificationEmail: async ({ user, url }) => {
-      const html = generateVerifyEmailTemplate({ username: user.name, url });
-
-      const result = await resend.emails.send({
-        from: "CodeAI <noreply@yourdomain.com>",
-        to: user.email,
-        subject: "CodeAI - Verify email",
-        html,
-      });
-
-      console.log("The result is: ", result);
-    },
-    sendOnSignUp: true,
-    autoSignInAfterVerification: true,
+    // sendVerificationEmail: async ({ user, url }) => {
+    //   const html = generateVerifyEmailTemplate({ username: user.name, url });
+    //   const result = await resend.emails.send({
+    //     from: "CodeAI <noreply@yourdomain.com>",
+    //     to: user.email,
+    //     subject: "CodeAI - Verify email",
+    //     html,
+    //   });
+    //   console.log("The result is: ", result);
+    // },
+    // sendOnSignUp: true,
+    // autoSignInAfterVerification: true,
   },
   socialProviders: {
     github: {
