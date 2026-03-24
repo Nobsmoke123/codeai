@@ -6,12 +6,14 @@ import { ChangeEvent, useState } from "react";
 import { BiLogoGithub, BiLogoGoogle } from "react-icons/bi";
 import { toast } from "react-toastify";
 import { BeatLoader } from "react-spinners";
-import { useRouter } from "next/navigation";
+import TogglePassword from "../ui/TogglePassword";
+// import { useRouter } from "next/navigation";
 
 type RegisterFormData = {
   fullname: string;
   email: string;
   password: string;
+  confirm_password: string;
 };
 
 const RegisterForm = () => {
@@ -19,11 +21,18 @@ const RegisterForm = () => {
     email: "",
     fullname: "",
     password: "",
+    confirm_password: "",
   });
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const router = useRouter();
+  const [revealPassword, setRevealPassword] = useState<boolean>(false);
+
+  const handlePasswordToggle = () => {
+    setRevealPassword(!revealPassword);
+  };
+
+  // const router = useRouter();
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -33,18 +42,16 @@ const RegisterForm = () => {
   const handleSubmit = async () => {
     try {
       setIsLoading(true);
-      const result = await signUp.email(
-        {
-          ...formData,
-          name: formData.fullname,
-          callbackURL: "/explainer",
-        },
-        {
-          onSuccess: () => {
-            router.push("/explainer");
-          },
-        },
-      );
+
+      if (formData.password !== formData.confirm_password) {
+        toast.error("Password mismatch. Password must match Confirm Password.");
+      }
+
+      const result = await signUp.email({
+        ...formData,
+        name: formData.fullname,
+        callbackURL: "/explainer",
+      });
       setIsLoading(false);
       if (result.data?.user) {
         toast.success("Account created successfully.");
@@ -111,10 +118,36 @@ const RegisterForm = () => {
             <input
               className="w-full bg-[#191b24] border-none ring-1 ring-outline-variant focus:ring-2 focus:ring-primary rounded-lg py-3 px-4 text-[#ffffff] placeholder:text-slate-600 transition-all outline-none"
               placeholder="••••••••"
-              type="password"
+              type={!revealPassword ? "password" : "text"}
               onChange={handleInputChange}
               value={formData.password}
               name="password"
+            />
+            <TogglePassword
+              revealPassword={revealPassword}
+              togglePassword={handlePasswordToggle}
+            />
+          </div>
+        </div>
+
+        <div className="space-y-2">
+          <div className="flex justify-between items-center px-1">
+            <label className="block text-[10px] font-black tracking-widest text-[#94a3b8] uppercase">
+              Confirm Password
+            </label>
+          </div>
+          <div className="relative">
+            <input
+              className="w-full bg-[#191b24] border-none ring-1 ring-outline-variant focus:ring-2 focus:ring-primary rounded-lg py-3 px-4 text-[#ffffff] placeholder:text-slate-600 transition-all outline-none"
+              placeholder="••••••••"
+              type={!revealPassword ? "password" : "text"}
+              onChange={handleInputChange}
+              value={formData.confirm_password}
+              name="confirm_password"
+            />
+            <TogglePassword
+              revealPassword={revealPassword}
+              togglePassword={handlePasswordToggle}
             />
           </div>
         </div>
@@ -185,6 +218,6 @@ const RegisterForm = () => {
       </div>
     </div>
   );
-};
+};;
 
 export default RegisterForm;

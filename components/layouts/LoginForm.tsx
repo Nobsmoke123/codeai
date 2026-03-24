@@ -6,6 +6,7 @@ import { ChangeEvent, useState } from "react";
 import { BiLogoGithub, BiLogoGoogle } from "react-icons/bi";
 import { toast } from "react-toastify";
 import { BeatLoader } from "react-spinners";
+import TogglePassword from "../ui/TogglePassword";
 
 type LoginFormData = {
   email: string;
@@ -20,6 +21,12 @@ const LoginForm = () => {
   });
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  const [revealPassword, setRevealPassword] = useState<boolean>(false);
+
+  const handlePasswordToggle = () => {
+    setRevealPassword(!revealPassword);
+  };
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -46,7 +53,6 @@ const LoginForm = () => {
       setIsLoading(false);
     }
   };
-
 
   return (
     <div className="w-full max-w-md max-w-[420px] relative z-10">
@@ -91,10 +97,14 @@ const LoginForm = () => {
               <input
                 className="w-full bg-[#191b24] border-none ring-1 ring-outline-variant focus:ring-2 focus:ring-primary rounded-lg py-3 px-4 text-[#ffffff] placeholder:text-slate-600 transition-all outline-none"
                 placeholder="••••••••"
-                type="password"
+                type={!revealPassword ? "password" : "text"}
                 name="password"
                 onChange={handleInputChange}
                 value={formData.password}
+              />
+              <TogglePassword
+                revealPassword={revealPassword}
+                togglePassword={handlePasswordToggle}
               />
             </div>
           </div>

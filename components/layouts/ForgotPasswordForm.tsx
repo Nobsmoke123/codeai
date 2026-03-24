@@ -1,14 +1,46 @@
 "use client";
 
+import { requestPasswordReset } from "@/lib/auth-client";
 import Link from "next/link";
+import { ChangeEvent, useState } from "react";
 import {
   BsArrowRight,
   BsChevronLeft,
   BsEnvelopeFill,
   BsUnlockFill,
 } from "react-icons/bs";
+import { BeatLoader } from "react-spinners";
+import { toast } from "react-toastify";
 
 const ForgotPasswordForm = () => {
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [email, setEmail] = useState<string>("");
+
+  const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const { value } = event.target;
+    setEmail(value);
+  };
+
+  const handleSubmit = async () => {
+    try {
+      setIsLoading(true);
+      const { data, error } = await requestPasswordReset({
+        email,
+        redirectTo: "/",
+      });
+      if (error) {
+        toast.error(error.message);
+        return;
+      }
+      toast.success(data.message);
+    } catch (error) {
+      console.log(error);
+      toast.error("An error occured please contact support.");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+  
   return (
     <div className="bg-[#11131b]/40 backdrop-blur-xl border border-[#1e293b]/50 p-8 rounded-xl ">
       <div className="mb-10 text-center">
@@ -33,15 +65,20 @@ const ForgotPasswordForm = () => {
               className="w-full bg-[#191b24] border border-[#1e293b] focus:border-primary focus:ring-1 focus:ring-primary rounded-lg py-4 pl-12 pr-4 text-[#ffffff] placeholder:text-slate-600 transition-all outline-none"
               placeholder="johndoe@gmail.com"
               required
+              name="email"
               type="email"
+              value={email}
+              onChange={handleInputChange}
             />
           </div>
         </div>
         <button
           className="w-full bg-[#135bec] text-[#ffffff] font-bold py-4 rounded-lg shadow-[0_0_20px_rgba(19,91,236,0.25)] hover:bg-[#135bec]/90 active:scale-[0.98] transition-all flex items-center justify-center gap-2 group"
-          type="submit"
+          type="button"
+          disabled={!isLoading ? false : true}
+          onClick={handleSubmit}
         >
-          <span>Send Reset Link</span>
+          {!isLoading ? <span>Send Reset Link</span> : <BeatLoader />}
           <BsArrowRight className="material-symbols-outlined text-xl group-hover:translate-x-1 transition-transform" />
         </button>
       </form>
