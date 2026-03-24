@@ -29,8 +29,10 @@ export default function RootLayout({
       >
         <ThemeProvider
           attribute={"class"}
-          defaultTheme="system"
-          enableSystem={true}
+          defaultTheme="dark"
+          enableSystem={false}
+          themes={["light", "dark"]}
+          storageKey="codeai-theme"
           disableTransitionOnChange
         >
           <ToastContainer />

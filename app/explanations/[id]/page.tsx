@@ -57,7 +57,7 @@ const ExplanationPage = async ({
       <main className="max-w-5xl mx-auto p-4 pb-32 space-y-6">
         <section className="bg-white dark:bg-slate-900 rounded-xl p-4 border border-slate-200 dark:border-slate-800 shadow-sm">
           <div className="flex items-center justify-between mb-3">
-            <span className="text-xs font-semibold uppercase tracking-wider text-white dark:text-slate-400">
+            <span className="text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">
               Original Snippet
             </span>
           </div>

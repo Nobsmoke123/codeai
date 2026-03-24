@@ -71,7 +71,7 @@ const SettingsPage = async () => {
               <p className="text-sm text-slate-500 dark:text-slate-400 truncate">
                 {user.email}
               </p>
-              <p className="text-xs text-slate-300 font-medium ">
+              <p className="text-xs text-black dark:text-slate-300 font-medium ">
                 Last Login:{" "}
                 {formatDistanceToNow(new Date(profile.last_login_at), {
                   addSuffix: true,

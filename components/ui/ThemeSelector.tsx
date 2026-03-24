@@ -1,41 +1,69 @@
 "use client";
-import { useTheme } from "next-themes";
-import { useEffect, useState } from "react";
-import { clsx } from "clsx";
 
-type ThemeOption = "light" | "dark" | "system";
-const options: ThemeOption[] = ["light", "dark", "system"];
+import { clsx } from "clsx";
+import { useTheme } from "next-themes";
+import { useSyncExternalStore } from "react";
+import { BsMoonStarsFill, BsSunFill } from "react-icons/bs";
+
+type ThemeOption = "light" | "dark";
+
+const options: Array<{
+  icon: React.ReactNode;
+  label: string;
+  value: ThemeOption;
+}> = [
+  {
+    icon: <BsSunFill className="text-sm" />,
+    label: "Light",
+    value: "light",
+  },
+  {
+    icon: <BsMoonStarsFill className="text-sm" />,
+    label: "Dark",
+    value: "dark",
+  },
+];
+
+const subscribe = () => {
+  return () => {};
+};
+
+const getSnapshot = () => true;
+const getServerSnapshot = () => false;
 
 const ThemeSelector = () => {
-  const { theme, setTheme } = useTheme();
-  const [mounted, setMounted] = useState<boolean>(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+  const { setTheme, theme } = useTheme();
+  const mounted = useSyncExternalStore(
+    subscribe,
+    getSnapshot,
+    getServerSnapshot,
+  );
 
   if (!mounted) {
     return null;
   }
 
+  const activeTheme = theme === "light" ? "light" : "dark";
+
   return (
-    <div className="grid grid-cols-3 bg-slate-100 dark:bg-slate-800 p-1 rounded-lg">
+    <div className="grid grid-cols-2 rounded-2xl border border-panel-border bg-panel p-1">
       {options.map((option) => {
-        const active = theme === option;
+        const active = activeTheme === option.value;
 
         return (
           <button
-            key={option}
+            key={option.value}
             type="button"
-            onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+            onClick={() => setTheme(option.value)}
             className={clsx(
-              "py-1.5 text-sm font-medium rounded-md text-slate-400 dark:text-white",
+              "flex items-center justify-center gap-2 rounded-xl px-3 py-2.5 text-sm font-semibold transition-all",
               active
-                ? "bg-blue-600 dark:text-white"
-                : "text-slate-600 dark:text-slate-400",
+                ? "bg-primary text-black dark:text-white shadow-lg shadow-primary/20"
+                : "text-slate-600 hover:bg-white/80 text-black dark:text-slate-400 dark:hover:bg-slate-950/70",
             )}
           >
-            {option[0].toUpperCase() + option.slice(1).toLowerCase()}
+            {option.icon}
+            <span>{option.label}</span>
           </button>
         );
       })}

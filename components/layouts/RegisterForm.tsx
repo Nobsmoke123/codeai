@@ -4,10 +4,9 @@ import { signIn, signUp } from "@/lib/auth-client";
 import Link from "next/link";
 import { ChangeEvent, useState } from "react";
 import { BiLogoGithub, BiLogoGoogle } from "react-icons/bi";
-import { toast } from "react-toastify";
 import { BeatLoader } from "react-spinners";
+import { toast } from "react-toastify";
 import TogglePassword from "../ui/TogglePassword";
-// import { useRouter } from "next/navigation";
 
 type RegisterFormData = {
   fullname: string;
@@ -16,6 +15,13 @@ type RegisterFormData = {
   confirm_password: string;
 };
 
+const labelClassName =
+  "ml-1 block text-[10px] font-black uppercase tracking-[0.28em] text-muted-foreground";
+const inputClassName =
+  "w-full rounded-xl border border-input-border bg-input-surface px-4 py-3 text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-primary focus:ring-2 focus:ring-primary/20 dark:text-white dark:placeholder:text-slate-600";
+const socialButtonClassName =
+  "flex items-center justify-center gap-2 rounded-xl border border-panel-border bg-white/70 px-4 py-3 text-slate-700 transition-colors hover:bg-white active:scale-95 dark:bg-slate-950/60 dark:text-slate-200 dark:hover:bg-slate-900";
+
 const RegisterForm = () => {
   const [formData, setFormData] = useState<RegisterFormData>({
     email: "",
@@ -23,16 +29,12 @@ const RegisterForm = () => {
     password: "",
     confirm_password: "",
   });
-
   const [isLoading, setIsLoading] = useState<boolean>(false);
-
   const [revealPassword, setRevealPassword] = useState<boolean>(false);
 
   const handlePasswordToggle = () => {
     setRevealPassword(!revealPassword);
   };
-
-  // const router = useRouter();
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -45,6 +47,7 @@ const RegisterForm = () => {
 
       if (formData.password !== formData.confirm_password) {
         toast.error("Password mismatch. Password must match Confirm Password.");
+        return;
       }
 
       const result = await signUp.email({
@@ -52,7 +55,7 @@ const RegisterForm = () => {
         name: formData.fullname,
         callbackURL: "/explainer",
       });
-      setIsLoading(false);
+
       if (result.data?.user) {
         toast.success("Account created successfully.");
       } else {
@@ -67,56 +70,48 @@ const RegisterForm = () => {
   };
 
   return (
-    <div className="glass-panel border border-white/5 rounded-xl p-8 shadow-2xl">
+    <div className="glass-panel rounded-[28px] p-8 shadow-2xl sm:p-10">
       <div className="mb-8">
-        <h1 className="text-[36px] font-black leading-tight tracking-tight mb-2">
+        <h1 className="mb-2 text-[36px] font-black leading-tight tracking-tight text-slate-950 dark:text-white">
           Create Account
         </h1>
-        <p className="text-[#94a3b8] text-sm font-medium">
+        <p className="text-sm font-medium text-muted-foreground">
           Join the next generation of engineering.
         </p>
       </div>
+
       <form action="#" className="space-y-6">
         <div className="space-y-2">
-          <label className="block text-[10px] font-black tracking-widest text-[#94a3b8] uppercase ml-1">
-            Full Name
-          </label>
-          <div className="relative">
-            <input
-              className="w-full bg-[#191b24] border-none ring-1 ring-outline-variant focus:ring-2 focus:ring-primary rounded-lg py-3 px-4 text-[#ffffff] placeholder:text-slate-600 transition-all outline-none"
-              placeholder="John Doe"
-              type="text"
-              onChange={handleInputChange}
-              value={formData.fullname}
-              name="fullname"
-            />
-          </div>
+          <label className={labelClassName}>Full Name</label>
+          <input
+            className={inputClassName}
+            placeholder="John Doe"
+            type="text"
+            onChange={handleInputChange}
+            value={formData.fullname}
+            name="fullname"
+          />
         </div>
 
         <div className="space-y-2">
-          <label className="block text-[10px] font-black tracking-widest text-[#94a3b8] uppercase ml-1">
-            Email Address
-          </label>
-          <div className="relative">
-            <input
-              className="w-full bg-[#191b24] border-none ring-1 ring-outline-variant focus:ring-2 focus:ring-primary rounded-lg py-3 px-4 text-[#ffffff] placeholder:text-slate-600 transition-all outline-none"
-              placeholder="name@company.com"
-              type="email"
-              onChange={handleInputChange}
-              value={formData.email}
-              name="email"
-            />
-          </div>
+          <label className={labelClassName}>Email Address</label>
+          <input
+            className={inputClassName}
+            placeholder="name@company.com"
+            type="email"
+            onChange={handleInputChange}
+            value={formData.email}
+            name="email"
+          />
         </div>
+
         <div className="space-y-2">
-          <div className="flex justify-between items-center px-1">
-            <label className="block text-[10px] font-black tracking-widest text-[#94a3b8] uppercase">
-              Password
-            </label>
+          <div className="flex items-center justify-between px-1">
+            <label className={labelClassName}>Password</label>
           </div>
-          <div className="relative">
+          <div className="relative group">
             <input
-              className="w-full bg-[#191b24] border-none ring-1 ring-outline-variant focus:ring-2 focus:ring-primary rounded-lg py-3 px-4 text-[#ffffff] placeholder:text-slate-600 transition-all outline-none"
+              className={inputClassName}
               placeholder="••••••••"
               type={!revealPassword ? "password" : "text"}
               onChange={handleInputChange}
@@ -131,14 +126,12 @@ const RegisterForm = () => {
         </div>
 
         <div className="space-y-2">
-          <div className="flex justify-between items-center px-1">
-            <label className="block text-[10px] font-black tracking-widest text-[#94a3b8] uppercase">
-              Confirm Password
-            </label>
+          <div className="flex items-center justify-between px-1">
+            <label className={labelClassName}>Confirm Password</label>
           </div>
-          <div className="relative">
+          <div className="relative group">
             <input
-              className="w-full bg-[#191b24] border-none ring-1 ring-outline-variant focus:ring-2 focus:ring-primary rounded-lg py-3 px-4 text-[#ffffff] placeholder:text-slate-600 transition-all outline-none"
+              className={inputClassName}
               placeholder="••••••••"
               type={!revealPassword ? "password" : "text"}
               onChange={handleInputChange}
@@ -151,29 +144,29 @@ const RegisterForm = () => {
             />
           </div>
         </div>
+
         <button
-          className="w-full bg-blue-500 text-white font-black py-4 rounded-lg shadow-[0_0_40px_-10px_rgba(19,91,236,0.3)] hover:opacity-90 active:scale-[0.98] transition-all tracking-widest uppercase text-sm"
+          className="w-full rounded-xl bg-blue-500 dark:bg-primary py-4 text-sm font-black uppercase tracking-[0.28em] text-white shadow-[0_0_40px_-10px_rgba(19,91,236,0.3)] transition-all hover:opacity-90 active:scale-[0.98]"
           type="button"
-          disabled={!isLoading ? false : true}
+          disabled={isLoading}
           onClick={handleSubmit}
         >
-          {!isLoading ? "Register" : <BeatLoader />}
+          {!isLoading ? "Register" : <BeatLoader color="#fff" />}
         </button>
       </form>
 
       <div className="relative my-8">
         <div className="absolute inset-0 flex items-center">
-          <span className="w-full border-t border-outline-variant/50"></span>
+          <span className="w-full border-t border-panel-border" />
         </div>
         <div className="relative flex justify-center text-xs uppercase">
-          <span className="bg-[#0b0d11] px-4 text-[#94a3b8] font-black tracking-widest">
+          <span className="bg-panel px-4 text-[10px] font-black tracking-[0.28em] text-muted-foreground">
             Or Continue With
           </span>
         </div>
       </div>
 
       <div className="grid grid-cols-2 gap-4">
-        {/* Google button */}
         <button
           onClick={() =>
             signIn.social({
@@ -181,15 +174,14 @@ const RegisterForm = () => {
               callbackURL: "/explainer",
             })
           }
-          className="flex items-center justify-center gap-2 py-3 px-4 rounded-lg bg-[#11131b] ring-1 ring-outline-variant hover:bg-[#191b24] transition-colors active:scale-95 group"
+          className={socialButtonClassName}
         >
-          <BiLogoGoogle className="" />
-          <span className="text-[10px] font-black tracking-widest uppercase text-[#94a3b8]">
+          <BiLogoGoogle />
+          <span className="text-[10px] font-black uppercase tracking-[0.28em] text-muted-foreground">
             Google
           </span>
         </button>
 
-        {/* Github button */}
         <button
           onClick={() =>
             signIn.social({
@@ -197,20 +189,21 @@ const RegisterForm = () => {
               callbackURL: "/explainer",
             })
           }
-          className="flex items-center justify-center gap-2 py-3 px-4 rounded-lg bg-[#11131b] ring-1 ring-outline-variant hover:bg-[#191b24] transition-colors active:scale-95 group"
+          className={socialButtonClassName}
         >
-          <BiLogoGithub className="" />
-          <span className="text-[10px] font-black tracking-widest uppercase text-[#94a3b8]">
+          <BiLogoGithub />
+          <span className="text-[10px] font-black uppercase tracking-[0.28em] text-muted-foreground">
             GitHub
           </span>
         </button>
       </div>
+
       <div className="mt-10 text-center">
-        <p className="text-[#94a3b8] text-[12px] font-medium">
+        <p className="text-[12px] font-medium text-muted-foreground">
           Already have an account? &nbsp;&nbsp;
           <Link
             href={"/login"}
-            className="text-[#135BEC] font-black ml-1 hover:underline decoration-2 underline-offset-4 uppercase tracking-widest"
+            className="ml-1 font-black uppercase tracking-[0.28em] text-primary hover:underline decoration-2 underline-offset-4"
           >
             Login
           </Link>
@@ -218,6 +211,6 @@ const RegisterForm = () => {
       </div>
     </div>
   );
-};;
+};
 
 export default RegisterForm;

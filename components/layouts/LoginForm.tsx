@@ -4,8 +4,8 @@ import { signIn } from "@/lib/auth-client";
 import Link from "next/link";
 import { ChangeEvent, useState } from "react";
 import { BiLogoGithub, BiLogoGoogle } from "react-icons/bi";
-import { toast } from "react-toastify";
 import { BeatLoader } from "react-spinners";
+import { toast } from "react-toastify";
 import TogglePassword from "../ui/TogglePassword";
 
 type LoginFormData = {
@@ -13,15 +13,19 @@ type LoginFormData = {
   password: string;
 };
 
-const LoginForm = () => {
+const labelClassName =
+  "ml-1 block text-[10px] font-black uppercase tracking-[0.28em] text-muted-foreground";
+const inputClassName =
+  "w-full rounded-xl border border-input-border bg-input-surface px-4 py-3 text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-primary focus:ring-2 focus:ring-primary/20 dark:text-white dark:placeholder:text-slate-600";
+const socialButtonClassName =
+  "flex items-center justify-center gap-2 rounded-xl border border-panel-border bg-white/70 px-4 py-3 text-slate-700 transition-colors hover:bg-white active:scale-95 dark:bg-slate-950/60 dark:text-slate-200 dark:hover:bg-slate-900";
 
+const LoginForm = () => {
   const [formData, setFormData] = useState<LoginFormData>({
     email: "",
     password: "",
   });
-
   const [isLoading, setIsLoading] = useState<boolean>(false);
-
   const [revealPassword, setRevealPassword] = useState<boolean>(false);
 
   const handlePasswordToggle = () => {
@@ -47,7 +51,7 @@ const LoginForm = () => {
       }
 
       toast.success("Login successful.");
-    } catch (error) {
+    } catch {
       toast.error("Invalid email or password.");
     } finally {
       setIsLoading(false);
@@ -55,132 +59,119 @@ const LoginForm = () => {
   };
 
   return (
-    <div className="w-full max-w-md max-w-[420px] relative z-10">
-      <div className="glass-panel border border-white/5 rounded-xl p-8 shadow-2xl">
-        <div className="mb-8">
-          <h1 className="text-[36px] font-black leading-tight tracking-tight mb-2">
-            Welcome Back.
-          </h1>
-          <p className="text-[#94a3b8] text-sm font-medium">
-            Continue your development journey.
-          </p>
-        </div>
-        <form action="#" className="space-y-6">
-          <div className="space-y-2">
-            <label className="block text-[10px] font-black tracking-widest text-[#94a3b8] uppercase ml-1">
-              Email Address
-            </label>
-            <div className="relative">
-              <input
-                className="w-full bg-[#191b24] border-none ring-1 ring-outline-variant focus:ring-2 focus:ring-primary rounded-lg py-3 px-4 text-[#ffffff] placeholder:text-slate-600 transition-all outline-none"
-                placeholder="name@company.com"
-                type="email"
-                name="email"
-                onChange={handleInputChange}
-                value={formData.email}
-              />
-            </div>
-          </div>
-          <div className="space-y-2">
-            <div className="flex justify-between items-center px-1">
-              <label className="block text-[10px] font-black tracking-widest text-[#94a3b8] uppercase">
-                Password
-              </label>
-              <Link
-                href={"/forgot-password"}
-                className="text-[10px] font-black tracking-widest text-primary uppercase hover:opacity-80 transition-opacity"
-              >
-                Forgot?
-              </Link>
-            </div>
-            <div className="relative">
-              <input
-                className="w-full bg-[#191b24] border-none ring-1 ring-outline-variant focus:ring-2 focus:ring-primary rounded-lg py-3 px-4 text-[#ffffff] placeholder:text-slate-600 transition-all outline-none"
-                placeholder="••••••••"
-                type={!revealPassword ? "password" : "text"}
-                name="password"
-                onChange={handleInputChange}
-                value={formData.password}
-              />
-              <TogglePassword
-                revealPassword={revealPassword}
-                togglePassword={handlePasswordToggle}
-              />
-            </div>
-          </div>
-          <button
-            className="w-full bg-blue-500 text-white font-black py-4 rounded-lg shadow-[0_0_40px_-10px_rgba(19,91,236,0.3)] hover:opacity-90 active:scale-[0.98] transition-all tracking-widest uppercase text-sm"
-            type="button"
-            disabled={!isLoading ? false : true}
-            onClick={handleSubmitButton}
-          >
-            {!isLoading ? "Login" : <BeatLoader />}
-          </button>
-        </form>
+    <div className="glass-panel rounded-[28px] p-8 shadow-2xl sm:p-10">
+      <div className="mb-8">
+        <h1 className="mb-2 text-[36px] font-black leading-tight tracking-tight text-slate-950 dark:text-white">
+          Welcome Back.
+        </h1>
+        <p className="text-sm font-medium text-muted-foreground">
+          Continue your development journey.
+        </p>
+      </div>
 
-        <div className="relative my-8">
-          <div className="absolute inset-0 flex items-center">
-            <span className="w-full border-t border-outline-variant/50"></span>
-          </div>
-          <div className="relative flex justify-center text-xs uppercase">
-            <span className="bg-[#0b0d11] px-4 text-[#94a3b8] font-black tracking-widest">
-              Or Continue With
-            </span>
-          </div>
+      <form action="#" className="space-y-6">
+        <div className="space-y-2">
+          <label className={labelClassName}>Email Address</label>
+          <input
+            className={inputClassName}
+            placeholder="name@company.com"
+            type="email"
+            name="email"
+            onChange={handleInputChange}
+            value={formData.email}
+          />
         </div>
 
-        <div className="grid grid-cols-2 gap-4">
-          {/* Google button */}
-          <button
-            onClick={async () =>
-              await signIn.social({
-                provider: "google",
-                callbackURL: "/explainer",
-              })
-            }
-            className="flex items-center justify-center gap-2 py-3 px-4 rounded-lg bg-[#11131b] ring-1 ring-outline-variant hover:bg-[#191b24] transition-colors active:scale-95 group"
-          >
-            <BiLogoGoogle className="" />
-            <span className="text-[10px] font-black tracking-widest uppercase text-[#94a3b8]">
-              Google
-            </span>
-          </button>
-
-          {/* Github button */}
-          <button
-            onClick={async () =>
-              await signIn.social({
-                provider: "github",
-                callbackURL: "/explainer",
-              })
-            }
-            className="flex items-center justify-center gap-2 py-3 px-4 rounded-lg bg-[#11131b] ring-1 ring-outline-variant hover:bg-[#191b24] transition-colors active:scale-95 group"
-          >
-            <BiLogoGithub className="" />
-            <span className="text-[10px] font-black tracking-widest uppercase text-[#94a3b8]">
-              GitHub
-            </span>
-          </button>
-        </div>
-        <div className="mt-10 text-center">
-          <p className="text-[#94a3b8] text-[12px] font-medium">
-            Don't have an account? &nbsp;&nbsp;
+        <div className="space-y-2">
+          <div className="flex items-center justify-between px-1">
+            <label className={labelClassName}>Password</label>
             <Link
-              href={"/register"}
-              className="text-[#135BEC] font-black ml-1 hover:underline decoration-2 underline-offset-4 uppercase tracking-widest"
+              href={"/forgot-password"}
+              className="text-[10px] font-black uppercase tracking-[0.28em] text-primary transition-opacity hover:opacity-80"
             >
-              Register
+              Forgot?
             </Link>
-          </p>
+          </div>
+
+          <div className="relative group">
+            <input
+              className={inputClassName}
+              placeholder="••••••••"
+              type={!revealPassword ? "password" : "text"}
+              name="password"
+              onChange={handleInputChange}
+              value={formData.password}
+            />
+            <TogglePassword
+              revealPassword={revealPassword}
+              togglePassword={handlePasswordToggle}
+            />
+          </div>
+        </div>
+
+        <button
+          className="w-full rounded-xl bg-blue-500 dark:bg-primary py-4 text-sm font-black uppercase tracking-[0.28em] text-white shadow-[0_0_40px_-10px_rgba(19,91,236,0.3)] transition-all hover:opacity-90 active:scale-[0.98]"
+          type="button"
+          disabled={isLoading}
+          onClick={handleSubmitButton}
+        >
+          {!isLoading ? "Login" : <BeatLoader color="#fff" />}
+        </button>
+      </form>
+
+      <div className="relative my-8">
+        <div className="absolute inset-0 flex items-center">
+          <span className="w-full border-t border-panel-border" />
+        </div>
+        <div className="relative flex justify-center text-xs uppercase">
+          <span className="bg-panel px-4 text-[10px] font-black tracking-[0.28em] text-muted-foreground">
+            Or Continue With
+          </span>
         </div>
       </div>
-      <div className="mt-8 flex justify-between items-center opacity-30 px-2">
-        <span className="text-[10px] font-mono tracking-tighter">
-          v4.0.2-STABLE
-        </span>
-        <span className="text-[10px] font-mono tracking-tighter">
-          SECURED_BY_AES256
-        </span>
+
+      <div className="grid grid-cols-2 gap-4">
+        <button
+          onClick={async () =>
+            await signIn.social({
+              provider: "google",
+              callbackURL: "/explainer",
+            })
+          }
+          className={socialButtonClassName}
+        >
+          <BiLogoGoogle />
+          <span className="text-[10px] font-black uppercase tracking-[0.28em] text-muted-foreground">
+            Google
+          </span>
+        </button>
+
+        <button
+          onClick={async () =>
+            await signIn.social({
+              provider: "github",
+              callbackURL: "/explainer",
+            })
+          }
+          className={socialButtonClassName}
+        >
+          <BiLogoGithub />
+          <span className="text-[10px] font-black uppercase tracking-[0.28em] text-muted-foreground">
+            GitHub
+          </span>
+        </button>
+      </div>
+
+      <div className="mt-10 text-center">
+        <p className="text-[12px] font-medium text-muted-foreground">
+          Don&apos;t have an account?
+          <Link
+            href={"/register"}
+            className="ml-3 font-black uppercase tracking-[0.28em] text-primary hover:underline decoration-2 underline-offset-4"
+          >
+            Register
+          </Link>
+        </p>
       </div>
     </div>
   );

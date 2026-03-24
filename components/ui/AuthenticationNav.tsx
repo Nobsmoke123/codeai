@@ -1,10 +1,11 @@
 import Link from "next/link";
 import { BiTerminal } from "react-icons/bi";
+import ThemeToggle from "./ThemeToggle";
 
 const AuthenticationNav = () => {
   return (
-    <header className="fixed top-0 w-full z-50 bg-[#0B0D11] dark:bg-[#0B0D11] bg-gradient-to-b from-[#135BEC]/10 to-transparent shadow-[0_0_40px_-10px_rgba(19,91,236,0.3)]">
-      <div className="flex items-center justify-between px-6 h-16 w-full">
+    <header className="fixed top-0 z-50 w-full border-b border-nav-border bg-nav-surface shadow-[0_12px_40px_-28px_rgba(15,23,42,0.5)] backdrop-blur-xl">
+      <div className="mx-auto flex h-16 w-full max-w-5xl items-center justify-between gap-3 px-4 sm:px-6">
         <div className="flex items-center gap-3">
           <Link href={"/"}>
             <div className="flex items-center gap-2">
@@ -18,19 +19,20 @@ const AuthenticationNav = () => {
           </Link>
         </div>
 
-        <div className="flex items-center gap-4 text-sm font-medium text-slate-400">
+        <div className="flex items-center gap-3 text-sm font-medium text-slate-600 dark:text-slate-300">
           <Link
             href="/privacy"
-            className="transition hover:text-white"
+            className="transition hover:text-slate-950 dark:hover:text-white"
           >
             Privacy
           </Link>
           <Link
             href="/terms"
-            className="transition hover:text-white"
+            className="transition hover:text-slate-950 dark:hover:text-white"
           >
             Terms
           </Link>
+          <ThemeToggle compact />
         </div>
       </div>
     </header>

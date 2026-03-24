@@ -3,8 +3,8 @@ import { BsStars } from "react-icons/bs";
 
 const Loading = () => {
   return (
-    <div className="bg-background-dark dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 antialiased overflow-hidden">
-      <div className="flex  w-full max-w-md mx-auto flex-col bg-background-dark dark:bg-background-dark overflow-hidden">
+    <div className="overflow-hidden bg-gradient-to-b from-page-shell via-white to-slate-100 font-display text-slate-900 antialiased dark:from-background-dark dark:via-background-dark dark:to-black dark:text-slate-100">
+      <div className="mx-auto flex w-full max-w-md flex-col overflow-hidden bg-transparent">
         <div className="flex items-center px-4 pt-4 pb-2 justify-between">
           <div className="flex items-center gap-2">
             <div className="bg-custom-primary p-0.5 rounded-sm">
@@ -28,7 +28,7 @@ const Loading = () => {
               <br />
                   <span className="text-blue-400">const</span> response ={" "}
               <span className="text-blue-400">await</span> fetch(
-              <span className="text-orange-400">'https://api.example.com'</span>
+              <span className="text-orange-400">{`'https://api.example.com'`}</span>
               );
               <br />
                   <span className="text-blue-400">const</span> data ={" "}
@@ -40,7 +40,7 @@ const Loading = () => {
               &#x7B;
               <br />
                   console.error(
-              <span className="text-orange-400">'Error fetching data'</span>,
+              <span className="text-orange-400">{`'Error fetching data'`}</span>,
               error);
               <br />
                 &#x7D;
@@ -76,7 +76,7 @@ const Loading = () => {
               <div className="size-1.5 rounded-full bg-slate-300 dark:bg-slate-700"></div>
             </div>
           </div>
-          <div className="mt-12 w-full max-w-sm bg-white/5 dark:bg-white/5 border border-white/10 rounded-2xl p-4 backdrop-blur-md">
+          <div className="mt-12 w-full max-w-sm rounded-2xl border border-panel-border bg-panel p-4 backdrop-blur-md">
             <div className="flex gap-3">
               <div className="size-10 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
                 <BiSolidBulb className="text-primary text-xl" />

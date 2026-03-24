@@ -2,12 +2,12 @@ import { BiTerminal } from "react-icons/bi";
 
 const LoadingIndicator = () => {
   return (
-    <div className="bg-[#0b0d11] text-[#ffffff] font-body selection:bg-[#135bec]/30 min-h-screen flex flex-col overflow-hidden">
+    <div className="flex min-h-screen flex-col overflow-hidden bg-page-shell font-sans text-slate-900 selection:bg-[#135bec]/30 dark:bg-[#0b0d11] dark:text-white">
       <div className="absolute flex-grow flex flex-col items-center justify-center relative px-6">
         <div
           className="absolute inset-0 opacity-5 pointer-events-none"
           style={{
-            backgroundImage: `linear-gradient(#334155 1px, transparent 1px), linear-gradient(90deg, #334155 1px, transparent 1px)`,
+            backgroundImage: `linear-gradient(var(--grid-line) 1px, transparent 1px), linear-gradient(90deg, var(--grid-line) 1px, transparent 1px)`,
             backgroundSize: "40px 40px",
           }}
         ></div>
@@ -40,16 +40,16 @@ const LoadingIndicator = () => {
           <div className="text-center space-y-4">
             <div className="flex flex-col items-center gap-2">
               <span className="text-xs font-bold tracking-[0.3em] text-[#135bec] uppercase">
-                EXPLANING CODE...
+                EXPLAINING CODE...
               </span>
-              <div className="w-64 h-[2px] bg-[#282a32] relative overflow-hidden rounded-full">
+              <div className="relative h-[2px] w-64 overflow-hidden rounded-full bg-slate-300 dark:bg-[#282a32]">
                 <div
                   className="absolute inset-0 bg-[#135bec] w-1/2 animate-[progress_2s_ease-in-out_infinite]"
                   style={{ animation: "slide 1.5s infinite linear" }}
                 ></div>
               </div>
             </div>
-            <div className="font-mono text-[10px] text-[#94a3b8]/40 space-y-1 mt-6">
+            <div className="mt-6 space-y-1 font-mono text-[10px] text-[#94a3b8]/50 dark:text-[#94a3b8]/40">
               <p className="animate-pulse">
                 &gt; INITIALIZING SECURE HANDSHAKE
               </p>

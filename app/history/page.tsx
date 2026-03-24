@@ -98,7 +98,7 @@ const HistoryPage = async () => {
             ))}
 
           {explanations.length === 0 && (
-            <div className="h-10 bg-slate-900 rounded rounded-md flex items-center justify-center gap-4 p-8">
+            <div className="flex items-center justify-center gap-4 rounded-md border border-slate-200 bg-white p-8 dark:border-slate-800 dark:bg-slate-900">
               <BsBook className="text-3xl font-medium" />
               <p className="text-sm font-light">No Histories yet</p>
             </div>

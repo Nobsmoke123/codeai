@@ -1,11 +1,12 @@
 "use client";
 
 import { ChangeEvent, useState } from "react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { BiClipboard } from "react-icons/bi";
 import { BsStars } from "react-icons/bs";
 import { toast } from "react-toastify";
 import LoadingIndicator from "./Loading";
-import { useRouter } from "next/navigation";
 import { ErrorResult, SuccessResult } from "@/lib/types";
 
 const ExplainerClient = () => {
@@ -77,7 +78,7 @@ const ExplainerClient = () => {
             {/* Code Input Area */}
             <div className="relative flex-1 group">
               <div className="absolute top-3 right-3 z-10">
-                <button className="flex items-center gap-1.5 px-3 py-1.5 bg-slate-800/50 hover:bg-slate-800 text-white rounded-lg text-xs font-medium border border-slate-700 transition-all active:scale-95">
+                <button className="flex items-center gap-1.5 rounded-lg border border-slate-300 bg-slate-900 px-3 py-1.5 text-xs font-medium text-white transition-all active:scale-95 hover:bg-slate-950 dark:border-slate-700 dark:bg-slate-800/60 dark:hover:bg-slate-800">
                   <BiClipboard className="text-[16px]" />
                   Paste
                 </button>
@@ -111,7 +112,7 @@ const ExplainerClient = () => {
                 <textarea
                   onChange={handleTextArea}
                   value={code}
-                  className="flex-1 p-4 font-mono text-sm leading-relaxed bg-transparent border-none focus:ring-0 resize-none placeholder:italic"
+                  className="flex-1 resize-none border-none bg-transparent p-4 font-mono text-sm leading-relaxed text-slate-900 placeholder:italic placeholder:text-slate-400 focus:ring-0 dark:text-slate-100 dark:placeholder:text-slate-600"
                   placeholder="// Paste your code here to get a human-friendly explanation..."
                 ></textarea>
               </div>
@@ -121,7 +122,7 @@ const ExplainerClient = () => {
       </main>
 
       {/* Bottom Action Area */}
-      <footer className="p-4 bg-background-light dark:bg-background-dark border-t border-slate-200 dark:border-slate-800 pb-8 mx-auto">
+      <footer className="mx-auto border-t border-slate-200 bg-background-light/80 p-4 pb-8 backdrop-blur-xl dark:border-slate-800 dark:bg-background-dark/80">
         <div className="max-w-lg mx-auto flex flex-col space-y-3">
           <button
             onClick={handleClick}
@@ -133,8 +134,16 @@ const ExplainerClient = () => {
           </button>
 
           <p className="text-[10px] text-center text-slate-400 dark:text-slate-500 px-6 leading-tight">
-            By using CodeAI, you agree to our terms. CodeAI can sometimes
-            generate incorrect explanations. Use with caution.
+            By using CodeAI, you agree to our{" "}
+            <Link href="/terms" className="text-primary hover:underline">
+              Terms
+            </Link>{" "}
+            and{" "}
+            <Link href="/privacy" className="text-primary hover:underline">
+              Privacy Policy
+            </Link>
+            . CodeAI can sometimes generate incorrect explanations. Use with
+            caution.
           </p>
         </div>
       </footer>

@@ -41,8 +41,8 @@ const EditorPage = async () => {
   }
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background-dark font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-5xl flex-col items-center justify-between pt-6 px-6 bg-white dark:bg-black sm:items-start">
+    <div className="flex min-h-screen items-center justify-center bg-gradient-to-b from-page-shell via-white to-slate-100 font-sans dark:from-background-dark dark:via-black dark:to-slate-950">
+      <main className="flex min-h-screen w-full max-w-5xl flex-col items-center justify-between px-4 pb-6 pt-6 sm:items-start sm:px-6">
         <Navigation />
         <ExplainerClient />
         {/* Abstract Gradient Background Elements (Subtle) */}

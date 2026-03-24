@@ -1,22 +1,14 @@
-"use client";
-
 import Features from "@/components/layouts/Features";
 import Hero from "@/components/layouts/Hero";
-import { signOut, useSession } from "@/lib/auth-client";
+import Navigation from "@/components/ui/Navigation";
 import { webApplicationJsonLd, websiteJsonLd } from "@/lib/seo";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { BiTerminal } from "react-icons/bi";
 import { BsCodeSlash, BsTencentQq, BsTerminal, BsUbuntu } from "react-icons/bs";
 import { MdHub } from "react-icons/md";
-import { toast } from "react-toastify";
 
 export default function Home() {
-  const { data: session } = useSession();
-  const router = useRouter();
-
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background-dark font-sans dark:bg-black">
+    <div className="flex min-h-screen justify-center bg-gradient-to-b from-page-shell via-white to-slate-100 font-sans dark:from-background-dark dark:via-black dark:to-slate-950">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
@@ -27,62 +19,8 @@ export default function Home() {
           __html: JSON.stringify(webApplicationJsonLd),
         }}
       />
-      <main className="flex min-h-screen max-w-5xl flex-col items-center justify-between pt-6 px-4 bg-white dark:bg-black sm:items-start">
-        {/* Top Navigation */}
-        <nav className="flex items-center justify-between max-w-5xl w-full mx-auto">
-          <div className="flex items-center gap-2">
-            <div className="bg-custom-primary p-0.5 rounded-sm">
-              <BiTerminal className="text-white size-6" />
-            </div>
-            <span className="font-bold text-lg tracking-tight">CodeAI</span>
-          </div>
-
-          <div className="flex items-center gap-4">
-            {session?.user ? (
-              <>
-                <Link
-                  href={"/explainer"}
-                  className="p-2 text-white rounded-md text-sm tracking-tight"
-                >
-                  Explainer
-                </Link>
-
-                <Link
-                  href={"/history"}
-                  className="p-2 text-white rounded-md text-sm tracking-tight"
-                >
-                  History
-                </Link>
-
-                <Link
-                  href={"/settings"}
-                  className="p-2 text-white rounded-md text-sm tracking-tight"
-                >
-                  Settings
-                </Link>
-
-                <button
-                  type="button"
-                  onClick={async () => {
-                    await signOut();
-                    toast.success("Log out successfully.");
-                    router.replace("/");
-                  }}
-                  className="p-2 bg-blue-600/30 text-white rounded-md text-sm tracking-tight"
-                >
-                  Sign Out
-                </button>
-              </>
-            ) : (
-              <Link
-                href={"/login"}
-                className="p-2 bg-blue-600/30 text-white rounded-md text-sm tracking-tight"
-              >
-                Sign In
-              </Link>
-            )}
-          </div>
-        </nav>
+      <main className="flex min-h-screen w-full max-w-5xl flex-col items-center justify-between px-4 pt-6 sm:items-start sm:px-6">
+        <Navigation />
 
         {/* Hero Content */}
         <Hero />
@@ -90,7 +28,7 @@ export default function Home() {
         <Features />
 
         {/* <!-- Social Proof --> */}
-        <div className="mt-16 pt-8 border-t border-slate-200 dark:border-slate-800 w-full opacity-60 flex flex-col items-center gap-4">
+        <div className="mt-16 flex w-full flex-col items-center gap-4 border-t border-slate-200 pt-8 opacity-60 dark:border-slate-800">
           <p className="text-xs uppercase tracking-widest font-bold">
             Trusted by 10k+ Developers
           </p>
@@ -107,7 +45,7 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="mt-8 w-full border-t border-slate-200 dark:border-slate-800 pt-6 flex flex-col gap-4 text-sm text-slate-500 dark:text-slate-400 sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-8 flex w-full flex-col gap-4 border-t border-slate-200 pt-6 text-sm text-slate-500 dark:border-slate-800 dark:text-slate-400 sm:flex-row sm:items-center sm:justify-between">
           <p className="text-xs uppercase tracking-[0.3em]">
             Transparent product policies
           </p>
