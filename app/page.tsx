@@ -107,6 +107,20 @@ export default function Home() {
           </div>
         </div>
 
+        <div className="mt-8 w-full border-t border-slate-200 dark:border-slate-800 pt-6 flex flex-col gap-4 text-sm text-slate-500 dark:text-slate-400 sm:flex-row sm:items-center sm:justify-between">
+          <p className="text-xs uppercase tracking-[0.3em]">
+            Transparent product policies
+          </p>
+          <div className="flex items-center gap-4">
+            <Link href="/privacy" className="transition hover:text-primary">
+              Privacy
+            </Link>
+            <Link href="/terms" className="transition hover:text-primary">
+              Terms
+            </Link>
+          </div>
+        </div>
+
         {/* <!-- iOS Home Indicator Spacing --> */}
         <div className="h-8 w-full"></div>
       </main>

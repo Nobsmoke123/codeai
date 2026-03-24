@@ -17,6 +17,21 @@ const AuthenticationNav = () => {
             </div>
           </Link>
         </div>
+
+        <div className="flex items-center gap-4 text-sm font-medium text-slate-400">
+          <Link
+            href="/privacy"
+            className="transition hover:text-white"
+          >
+            Privacy
+          </Link>
+          <Link
+            href="/terms"
+            className="transition hover:text-white"
+          >
+            Terms
+          </Link>
+        </div>
       </div>
     </header>
   );

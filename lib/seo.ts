@@ -120,6 +120,43 @@ export function createNoIndexMetadata(
   };
 }
 
+export function createPageMetadata(
+  title: string,
+  description: string,
+  pathname: string,
+): Metadata {
+  const url = new URL(pathname, siteConfig.url).toString();
+  const brandedTitle = `${title} | ${siteConfig.name}`;
+
+  return {
+    title,
+    description,
+    alternates: {
+      canonical: pathname,
+    },
+    openGraph: {
+      type: "website",
+      locale: siteConfig.locale,
+      url,
+      siteName: siteConfig.name,
+      title: brandedTitle,
+      description,
+      images: [
+        {
+          url: "/icon.png",
+          alt: "CodeAI logo",
+        },
+      ],
+    },
+    twitter: {
+      card: "summary",
+      title: brandedTitle,
+      description,
+      images: ["/icon.png"],
+    },
+  };
+}
+
 export const websiteJsonLd = {
   "@context": "https://schema.org",
   "@type": "WebSite",

@@ -4,6 +4,7 @@ import ThemeSelector from "@/components/ui/ThemeSelector";
 import { createNoIndexMetadata } from "@/lib/seo";
 import { getServerSession } from "@/lib/session";
 import { cookies } from "next/headers";
+import Link from "next/link";
 import { redirect } from "next/navigation";
 import { BiSolidFile } from "react-icons/bi";
 import { BsGlobe } from "react-icons/bs";
@@ -124,21 +125,27 @@ const SettingsPage = async () => {
               </div>
               <MdOutlineOpenInNew className="text-slate-400" />
             </button>
-            <button className="w-full p-4 flex items-center justify-between hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors text-left">
+            <Link
+              href="/privacy"
+              className="w-full p-4 flex items-center justify-between hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors text-left"
+            >
               <div className="flex items-center gap-3">
                 <MdOutlineSecurity className="text-slate-400" />
                 <span className="font-medium">Privacy Policy</span>
               </div>
               <MdChevronRight className="text-slate-400" />
-            </button>
+            </Link>
 
-            <button className="w-full p-4 flex items-center justify-between hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors text-left">
+            <Link
+              href="/terms"
+              className="w-full p-4 flex items-center justify-between hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors text-left"
+            >
               <div className="flex items-center gap-3">
                 <BiSolidFile className="text-slate-400" />
                 <span className="font-medium">Terms of Service</span>
               </div>
               <MdChevronRight className="text-slate-400" />
-            </button>
+            </Link>
           </div>
         </div>
 
