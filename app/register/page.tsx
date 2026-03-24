@@ -1,7 +1,14 @@
+import type { Metadata } from "next";
 import RegisterForm from "@/components/layouts/RegisterForm";
 import AuthenticationNav from "@/components/ui/AuthenticationNav";
+import { createNoIndexMetadata } from "@/lib/seo";
 import { getServerSession } from "@/lib/session";
 import { redirect } from "next/navigation";
+
+export const metadata: Metadata = createNoIndexMetadata(
+  "Register",
+  "Create a CodeAI account to start generating clear, step-by-step AI explanations for code snippets.",
+);
 
 const RegisterPage = async () => {
   const session = await getServerSession();

@@ -3,6 +3,7 @@
 import Features from "@/components/layouts/Features";
 import Hero from "@/components/layouts/Hero";
 import { signOut, useSession } from "@/lib/auth-client";
+import { webApplicationJsonLd, websiteJsonLd } from "@/lib/seo";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { BiTerminal } from "react-icons/bi";
@@ -16,6 +17,16 @@ export default function Home() {
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-background-dark font-sans dark:bg-black">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(webApplicationJsonLd),
+        }}
+      />
       <main className="flex min-h-screen max-w-5xl flex-col items-center justify-between pt-6 px-4 bg-white dark:bg-black sm:items-start">
         {/* Top Navigation */}
         <nav className="flex items-center justify-between max-w-5xl w-full mx-auto">

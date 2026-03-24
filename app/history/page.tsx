@@ -1,4 +1,6 @@
+import type { Metadata } from "next";
 import Navigation from "@/components/ui/Navigation";
+import { createNoIndexMetadata } from "@/lib/seo";
 import { getServerSession } from "@/lib/session";
 import { redirect } from "next/navigation";
 import { BiDotsVerticalRounded } from "react-icons/bi";
@@ -11,6 +13,11 @@ import { vscDarkPlus } from "react-syntax-highlighter/dist/esm/styles/prism";
 import Link from "next/link";
 import { BsBook } from "react-icons/bs";
 import { formatDistanceToNow } from "date-fns";
+
+export const metadata: Metadata = createNoIndexMetadata(
+  "History",
+  "Review your saved CodeAI explanations and revisit previous AI code analyses.",
+);
 
 const HistoryPage = async () => {
   const session = await getServerSession();

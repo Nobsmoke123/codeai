@@ -1,7 +1,14 @@
+import type { Metadata } from "next";
 import ResetPasswordForm from "@/components/layouts/ResetPasswordForm";
 import AuthenticationNav from "@/components/ui/AuthenticationNav";
+import { createNoIndexMetadata } from "@/lib/seo";
 import { getServerSession } from "@/lib/session";
 import { redirect } from "next/navigation";
+
+export const metadata: Metadata = createNoIndexMetadata(
+  "Reset Password",
+  "Reset your CodeAI password and regain access to your account.",
+);
 
 const ResetPasswordPage = async () => {
   const session = await getServerSession();

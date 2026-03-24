@@ -1,6 +1,8 @@
+import type { Metadata } from "next";
 import Navigation from "@/components/ui/Navigation";
 import { getServerSession } from "@/lib/session";
 import { Explanation } from "@/lib/types";
+import { createNoIndexMetadata } from "@/lib/seo";
 import { redirect } from "next/navigation";
 import { BiBulb, BiSolidBarChartSquare } from "react-icons/bi";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
@@ -15,6 +17,11 @@ import { BsDiagram2Fill, BsFileEarmarkRichtext, BsStars } from "react-icons/bs";
 
 import { cookies } from "next/headers";
 import { parseBackticks } from "@/utils/helpers";
+
+export const metadata: Metadata = createNoIndexMetadata(
+  "Explanation Detail",
+  "View a private, saved CodeAI explanation with summaries, steps, and performance insights.",
+);
 
 const ExplanationPage = async ({
   params,

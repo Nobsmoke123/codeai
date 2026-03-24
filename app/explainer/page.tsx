@@ -1,8 +1,15 @@
+import type { Metadata } from "next";
 import ExplainerClient from "@/components/ui/ExplainerClient";
 import Navigation from "@/components/ui/Navigation";
 import { prisma } from "@/lib/auth";
+import { createNoIndexMetadata } from "@/lib/seo";
 import { getServerSession } from "@/lib/session";
 import { redirect } from "next/navigation";
+
+export const metadata: Metadata = createNoIndexMetadata(
+  "Explainer",
+  "Paste code into CodeAI and generate a private, structured explanation tailored to your snippet.",
+);
 
 const EditorPage = async () => {
   const session = await getServerSession();
