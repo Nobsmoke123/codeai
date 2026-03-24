@@ -22,6 +22,11 @@ const ForgotPasswordForm = () => {
   };
 
   const handleSubmit = async () => {
+    if (email.length === 0) {
+      toast.error("Enter the email address.");
+      return;
+    }
+
     try {
       setIsLoading(true);
       const { data, error } = await requestPasswordReset({
